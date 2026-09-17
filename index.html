@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Banco de Preguntas Temple</title>
 
   <style>
@@ -16,85 +17,102 @@
       --texto: #263746;
       --texto-suave: #607789;
       --blanco: #FFFFFF;
-      --estrella: #E7B84B;
+      --gris: #F5F7F9;
+      --rojo-suave: #FFF3F3;
       --sombra: 0 8px 25px rgba(47, 85, 115, 0.10);
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: var(--celeste-claro);
       color: var(--texto);
-      line-height: 1.5;
     }
 
-    /* HEADER */
+    /* ENCABEZADO */
 
     header {
-      background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
+      background: var(--azul-oscuro);
       color: white;
-      padding: 45px 20px;
-      text-align: center;
+      padding: 42px 20px 38px;
     }
 
-    header h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+    .header-inner {
+      max-width: 1180px;
+      margin: auto;
     }
 
-    header p {
+    .marca {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .subtitulo {
+      margin: 0;
       font-size: 16px;
-      opacity: 0.92;
+      line-height: 1.6;
+      opacity: 0.9;
     }
 
     /* CONTENEDOR */
 
-    .container {
-      max-width: 1200px;
+    .contenedor {
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 30px 20px 50px;
+      padding: 28px 20px 50px;
     }
 
     /* BUSCADOR */
 
-    .search-box {
-      margin-bottom: 20px;
+    .buscador {
+      background: var(--blanco);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--sombra);
+      margin-bottom: 18px;
     }
 
-    .search-box input {
+    .input-busqueda {
       width: 100%;
-      padding: 15px 18px;
+      padding: 15px 17px;
       border: 1px solid var(--azul-borde);
-      border-radius: 12px;
-      font-size: 16px;
-      outline: none;
-      background: white;
+      border-radius: 11px;
+      font-size: 15px;
       color: var(--texto);
+      outline: none;
       transition: 0.2s;
     }
 
-    .search-box input:focus {
-      border-color: var(--azul-medio);
-      box-shadow: 0 0 0 3px rgba(111, 163, 200, 0.15);
+    .input-busqueda:focus {
+      border-color: var(--azul);
+      box-shadow: 0 0 0 3px rgba(76, 120, 160, 0.10);
     }
 
     /* FILTROS */
 
-    .filters {
+    .filtros {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 15px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .filters select {
+    select {
       width: 100%;
-      padding: 13px 15px;
+      padding: 13px 14px;
       border: 1px solid var(--azul-borde);
       border-radius: 10px;
       background: white;
@@ -104,222 +122,219 @@
       cursor: pointer;
     }
 
-    .filters select:focus {
-      border-color: var(--azul-medio);
+    select:focus {
+      border-color: var(--azul);
     }
 
-    /* FILTRO FAVORITOS */
+    /* FAVORITOS */
 
-    .favorites-filter {
+    .barra-favoritos {
       display: flex;
-      justify-content: flex-end;
-      margin-bottom: 22px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
     }
 
-    .favorites-button {
+    .boton-favoritos {
       border: 1px solid var(--azul-borde);
-      border-radius: 10px;
-      padding: 11px 16px;
       background: white;
       color: var(--azul-oscuro);
+      padding: 11px 16px;
+      border-radius: 10px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
     }
 
-    .favorites-button:hover {
+    .boton-favoritos:hover {
       background: var(--celeste);
     }
 
-    .favorites-button.active {
-      background: var(--celeste);
-      border-color: var(--azul-medio);
+    .boton-favoritos.activo {
+      background: var(--azul-oscuro);
+      color: white;
+      border-color: var(--azul-oscuro);
     }
 
-    /* CONTADOR */
+    .contador-favoritos {
+      font-size: 13px;
+      color: var(--texto-suave);
+    }
 
-    .results-info {
-      margin-bottom: 20px;
+    /* INFORMACIÓN */
+
+    .info-resultados {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin: 22px 2px 15px;
       color: var(--texto-suave);
       font-size: 14px;
     }
 
-    /* GRID */
+    /* TARJETAS */
 
-    .questions-grid {
+    .grid-preguntas {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
-    /* TARJETA */
-
-    .card {
+    .tarjeta {
       position: relative;
-      background: var(--blanco);
-      border: 1px solid var(--azul-borde);
-      border-radius: 15px;
-      padding: 22px;
-      box-shadow: var(--sombra);
-      display: flex;
-      flex-direction: column;
-      min-height: 250px;
-      transition: 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(47, 85, 115, 0.14);
-    }
-
-    /* ESTRELLA */
-
-    .favorite-button {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--azul-borde);
-      border-radius: 50%;
       background: white;
-      color: #AAB9C4;
-      font-size: 20px;
-      line-height: 34px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.2s;
-      z-index: 2;
+      border: 1px solid #E2EBF1;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(47, 85, 115, 0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .favorite-button:hover {
-      background: var(--celeste);
-      color: var(--estrella);
-      transform: scale(1.05);
+    .tarjeta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sombra);
     }
 
-    .favorite-button.active {
-      color: var(--estrella);
-      border-color: #E7D49A;
-      background: #FFF9E8;
-    }
-
-    .question-number {
+    .numero-pregunta {
       color: var(--azul);
       font-size: 12px;
-      font-weight: bold;
+      font-weight: 700;
       letter-spacing: 0.5px;
       margin-bottom: 10px;
-      padding-right: 45px;
     }
 
-    .question-text {
+    .pregunta-texto {
       font-size: 16px;
-      font-weight: 600;
+      line-height: 1.55;
+      margin: 0 42px 18px 0;
       color: var(--texto);
-      margin-bottom: 18px;
-      flex-grow: 1;
-      padding-right: 10px;
     }
 
-    /* ETIQUETAS */
+    .estrella-tarjeta {
+      position: absolute;
+      right: 17px;
+      top: 15px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 23px;
+      color: #AAB9C4;
+      transition: 0.2s;
+    }
 
-    .tags {
+    .estrella-tarjeta:hover {
+      background: var(--celeste-claro);
+      transform: scale(1.08);
+    }
+
+    .estrella-tarjeta.activa {
+      color: #E3A72F;
+    }
+
+    .etiquetas {
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
-      margin-bottom: 18px;
+      margin-bottom: 17px;
     }
 
-    .tag {
+    .etiqueta {
       background: var(--celeste);
       color: var(--azul-oscuro);
-      border-radius: 20px;
-      padding: 5px 9px;
+      padding: 5px 8px;
+      border-radius: 7px;
       font-size: 11px;
       line-height: 1.3;
     }
 
-    /* BOTÓN VER PREGUNTA */
-
-    .view-button {
+    .boton-ver {
       width: 100%;
-      border: none;
-      border-radius: 9px;
-      padding: 11px 15px;
-      background: var(--azul);
+      border: 0;
+      background: var(--azul-oscuro);
       color: white;
-      font-size: 14px;
-      font-weight: 600;
+      padding: 11px 14px;
+      border-radius: 9px;
       cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
       transition: 0.2s;
     }
 
-    .view-button:hover {
-      background: var(--azul-oscuro);
-    }
-
-    /* SIN RESULTADOS */
-
-    .no-results {
-      grid-column: 1 / -1;
-      background: white;
-      border: 1px solid var(--azul-borde);
-      border-radius: 15px;
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--texto-suave);
+    .boton-ver:hover {
+      background: var(--azul);
     }
 
     /* PAGINACIÓN */
 
-    .pagination {
+    .paginacion {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 7px;
-      margin-top: 35px;
-      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
     }
 
-    .pagination button {
+    .boton-pagina {
       border: 1px solid var(--azul-borde);
-      border-radius: 9px;
-      min-width: 40px;
-      padding: 10px 13px;
       background: white;
       color: var(--azul-oscuro);
-      font-size: 14px;
-      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 9px;
       cursor: pointer;
-      transition: 0.2s;
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .pagination button:hover:not(:disabled) {
+    .boton-pagina:hover:not(:disabled) {
       background: var(--celeste);
     }
 
-    .pagination button:disabled {
+    .boton-pagina:disabled {
       opacity: 0.45;
       cursor: not-allowed;
     }
 
-    .pagination button.page-active {
-      background: var(--azul);
-      border-color: var(--azul);
-      color: white;
-    }
-
-    .pagination .arrow-button {
-      padding: 10px 15px;
-    }
-
-    .page-info {
-      color: var(--texto-suave);
+    .pagina-info {
       font-size: 13px;
-      margin: 0 8px;
-      white-space: nowrap;
+      color: var(--texto-suave);
+      min-width: 100px;
+      text-align: center;
+    }
+
+    /* ESTADO VACÍO */
+
+    .sin-resultados {
+      background: white;
+      border: 1px solid #E2EBF1;
+      border-radius: 15px;
+      padding: 45px 25px;
+      text-align: center;
+      color: var(--texto-suave);
+      grid-column: 1 / -1;
+    }
+
+    .sin-resultados-icono {
+      font-size: 35px;
+      margin-bottom: 12px;
+    }
+
+    .sin-resultados h3 {
+      color: var(--texto);
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .sin-resultados p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     /* MODAL */
@@ -327,32 +342,1770 @@
     .modal {
       display: none;
       position: fixed;
-      z-index: 1000;
       inset: 0;
-      background: rgba(38, 55, 70, 0.55);
+      background: rgba(22, 40, 53, 0.58);
+      z-index: 1000;
       padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.visible {
+      display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .modal.active {
-      display: flex;
-    }
-
-    .modal-content {
+    .modal-contenido {
       position: relative;
       width: 100%;
       max-width: 650px;
-      max-height: 90vh;
-      overflow-y: auto;
       background: white;
       border-radius: 18px;
       padding: 30px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
-      animation: modalAppear 0.2s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.20);
     }
 
-    @keyframes modalAppear {
-      from {
-        opacity:
-```
+    .cerrar-modal {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      background: var(--gris);
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--texto);
+    }
+
+    .cerrar-modal:hover {
+      background: var(--celeste);
+    }
+
+    .modal-numero {
+      color: var(--azul);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .modal-pregunta {
+      font-size: 21px;
+      line-height: 1.5;
+      color: var(--texto);
+      margin: 0 45px 22px 0;
+    }
+
+    .modal-datos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 25px;
+    }
+
+    .modal-acciones {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .accion {
+      flex: 1;
+      min-width: 180px;
+      padding: 12px 15px;
+      border-radius: 9px;
+      border: 1px solid var(--azul-borde);
+      background: white;
+      color: var(--azul-oscuro);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .accion:hover {
+      background: var(--celeste-claro);
+    }
+
+    .accion-principal {
+      background: var(--azul-oscuro);
+      color: white;
+      border-color: var(--azul-oscuro);
+    }
+
+    .accion-principal:hover {
+      background: var(--azul);
+    }
+
+    .accion-favorito.activa {
+      background: #FFF8E8;
+      border-color: #E8C56B;
+      color: #9A7119;
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--texto-suave);
+      font-size: 12px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 800px) {
+      .grid-preguntas {
+        grid-template-columns: 1fr;
+      }
+
+      .filtros {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      header {
+        padding: 32px 18px;
+      }
+
+      .contenedor {
+        padding: 20px 14px 40px;
+      }
+
+      .modal-contenido {
+        padding: 24px 20px;
+      }
+
+      .modal-pregunta {
+        font-size: 18px;
+      }
+
+      .info-resultados {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="marca">TEMPLE · RECURSOS PARA TU PRÁCTICA</div>
+      <h1>Banco de Preguntas Temple</h1>
+      <p class="subtitulo">
+        Explora y encuentra preguntas para tu práctica profesional.
+      </p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+
+    <section class="buscador">
+
+      <input
+        type="search"
+        id="busqueda"
+        class="input-busqueda"
+        placeholder="🔎 Buscar una pregunta..."
+        autocomplete="off"
+      >
+
+      <div class="filtros">
+
+        <select id="filtroModulo">
+          <option value="">Todos los módulos</option>
+        </select>
+
+        <select id="filtroEtapa">
+          <option value="">Todas las etapas</option>
+        </select>
+
+        <select id="filtroSubtema">
+          <option value="">Todos los subtemas</option>
+        </select>
+
+      </div>
+
+      <div class="barra-favoritos">
+
+        <button
+          id="botonFavoritos"
+          class="boton-favoritos"
+          type="button"
+        >
+          ☆ Solo favoritas
+        </button>
+
+        <span id="contadorFavoritos" class="contador-favoritos">
+          0 favoritas
+        </span>
+
+      </div>
+
+    </section>
+
+    <div class="info-resultados">
+      <span id="contadorResultados">0 preguntas</span>
+      <span id="textoPagina"></span>
+    </div>
+
+    <section id="listaPreguntas" class="grid-preguntas"></section>
+
+    <div id="paginacion" class="paginacion"></div>
+
+  </main>
+
+  <footer>
+    Banco de Preguntas Temple · Recursos para la práctica profesional
+  </footer>
+
+
+  <!-- MODAL -->
+
+  <div id="modal" class="modal">
+
+    <div class="modal-contenido">
+
+      <button
+        id="cerrarModal"
+        class="cerrar-modal"
+        type="button"
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
+
+      <div id="modalNumero" class="modal-numero"></div>
+
+      <h2 id="modalPregunta" class="modal-pregunta"></h2>
+
+      <div id="modalDatos" class="modal-datos"></div>
+
+      <div class="modal-acciones">
+
+        <button
+          id="modalFavorito"
+          class="accion accion-favorito"
+          type="button"
+        >
+          ☆ Agregar a favoritas
+        </button>
+
+        <button
+          id="copiarPregunta"
+          class="accion accion-principal"
+          type="button"
+        >
+          📋 Copiar pregunta
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =====================================================
+       DATOS
+       ===================================================== */
+
+    const preguntas = [
+
+      {
+        id: 1,
+        pregunta: "¿Qué te gustaría que fuera diferente al terminar este proceso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 2,
+        pregunta: "¿Qué cambios reconoces en ti que antes no estaban presentes?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 3,
+        pregunta: "¿Qué aprendiste sobre ti a lo largo de este proceso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 4,
+        pregunta: "¿Qué parte del proceso sientes que fue más significativa para ti?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 5,
+        pregunta: "¿Qué te gustaría conservar de lo que has construido hasta ahora?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 6,
+        pregunta: "¿Qué recursos personales reconoces ahora con mayor claridad?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 7,
+        pregunta: "¿Qué situación actual podrías afrontar de manera diferente gracias a lo trabajado?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 8,
+        pregunta: "¿Qué idea sobre ti mismo ha cambiado durante este proceso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 9,
+        pregunta: "¿Qué señales te indicarían que estás volviendo a tus patrones anteriores?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 10,
+        pregunta: "¿Qué te gustaría recordar cuando atravieses nuevamente un momento difícil?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 11,
+        pregunta: "¿Qué decisión relacionada con tu bienestar quieres seguir sosteniendo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 12,
+        pregunta: "¿Qué aspecto de este proceso quieres seguir explorando por tu cuenta?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 13,
+        pregunta: "¿Qué diferencia notas entre cómo enfrentabas antes una dificultad y cómo la enfrentas ahora?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 14,
+        pregunta: "¿Qué te llevas de este proceso que pueda acompañarte en otras áreas de tu vida?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 15,
+        pregunta: "¿Qué cambio pequeño representa para ti un avance importante?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 16,
+        pregunta: "¿Qué parte de ti sientes que ahora comprendes mejor?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 17,
+        pregunta: "¿Qué has descubierto sobre aquello que necesitas para sentirte mejor?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 18,
+        pregunta: "¿Qué situación te gustaría observar con mayor conciencia de ahora en adelante?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 19,
+        pregunta: "¿Qué te gustaría reconocer de ti mismo al mirar hacia atrás?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+      {
+        id: 20,
+        pregunta: "Si tuvieras que resumir lo más importante que aprendiste, ¿qué dirías?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Cierre e integración"
+      },
+
+      {
+        id: 21,
+        pregunta: "¿Qué necesitas hacer para mantener este cambio en el tiempo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 22,
+        pregunta: "¿Qué hábito podría ayudarte a sostener lo que has logrado?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 23,
+        pregunta: "¿Qué situaciones podrían dificultar que mantengas este cambio?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 24,
+        pregunta: "¿Cómo podrías prepararte para momentos en los que te resulte difícil continuar?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 25,
+        pregunta: "¿Qué apoyo podrías buscar si notas que estás perdiendo lo avanzado?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 26,
+        pregunta: "¿Qué señales te ayudarían a detectar a tiempo un retroceso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 27,
+        pregunta: "¿Qué conducta concreta quieres seguir practicando?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 28,
+        pregunta: "¿Qué podría hacer más fácil mantener este cambio durante las próximas semanas?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 29,
+        pregunta: "¿Qué obstáculos necesitas anticipar para cuidar lo que has construido?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 30,
+        pregunta: "¿Qué recordatorio podrías utilizar cuando aparezca la duda?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 31,
+        pregunta: "¿Qué persona podría ayudarte a mantener presente este objetivo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 32,
+        pregunta: "¿Qué diferencia hay entre mantener un cambio y exigir que todo sea perfecto?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 33,
+        pregunta: "¿Cómo podrías responder si tienes un día en el que vuelves a una conducta anterior?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 34,
+        pregunta: "¿Qué te ayudaría a volver a intentarlo después de una dificultad?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 35,
+        pregunta: "¿Qué parte del cambio depende directamente de ti?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 36,
+        pregunta: "¿Qué necesitas aceptar para poder sostener este proceso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 37,
+        pregunta: "¿Qué comportamiento sería una señal de que estás cuidando tu avance?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 38,
+        pregunta: "¿Qué puedes hacer cuando notes que estás perdiendo motivación?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 39,
+        pregunta: "¿Qué necesitas recordar acerca del ritmo de tu propio proceso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+      {
+        id: 40,
+        pregunta: "¿Qué compromiso realista quieres asumir contigo mismo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Sostenimiento del cambio"
+      },
+
+      {
+        id: 41,
+        pregunta: "¿Cuál sería un primer paso suficientemente pequeño como para poder hacerlo esta semana?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 42,
+        pregunta: "¿Qué podrías hacer hoy para acercarte un poco a lo que quieres?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 43,
+        pregunta: "¿Qué estás esperando para dar ese primer paso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 44,
+        pregunta: "¿Qué haría que comenzar fuera más sencillo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 45,
+        pregunta: "¿Qué parte de este cambio puedes empezar a trabajar sin esperar a sentirte completamente preparado?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 46,
+        pregunta: "¿Qué acción concreta podrías realizar en las próximas 24 horas?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 47,
+        pregunta: "¿Qué necesitas organizar antes de comenzar?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 48,
+        pregunta: "¿Qué pequeño cambio en tu rutina podría facilitar este proceso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 49,
+        pregunta: "¿Qué podrías probar en lugar de seguir haciendo lo mismo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 50,
+        pregunta: "¿Qué acción te permitiría obtener información antes de tomar una decisión mayor?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 51,
+        pregunta: "¿Qué sería un avance pequeño pero observable?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 52,
+        pregunta: "¿Qué puedes hacer aunque todavía tengas dudas?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 53,
+        pregunta: "¿Qué obstáculo puedes resolver antes de dar el siguiente paso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 54,
+        pregunta: "¿Qué necesitas dejar de esperar para comenzar?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 55,
+        pregunta: "¿Qué paso te parece posible incluso en un día difícil?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 56,
+        pregunta: "¿Qué recurso ya tienes y podrías utilizar para comenzar?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 57,
+        pregunta: "¿Qué podrías simplificar para que empezar no se sienta tan pesado?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 58,
+        pregunta: "¿Qué sería suficientemente bueno para comenzar, aunque no sea perfecto?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 59,
+        pregunta: "¿Qué acción depende completamente de ti?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+      {
+        id: 60,
+        pregunta: "¿Cuál quieres que sea tu siguiente paso concreto?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Primeros pasos"
+      },
+
+      {
+        id: 61,
+        pregunta: "¿Qué decisión estás evitando tomar en este momento?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 62,
+        pregunta: "¿Qué necesitas tener claro para poder decidir?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 63,
+        pregunta: "¿Qué opción se acerca más a lo que realmente necesitas?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 64,
+        pregunta: "¿Qué estás priorizando actualmente y por qué?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 65,
+        pregunta: "¿Qué estás dejando de lado al elegir esta opción?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 66,
+        pregunta: "¿Qué criterio quieres utilizar para tomar esta decisión?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 67,
+        pregunta: "¿Qué diferencia hay entre lo que quieres y lo que sientes que deberías elegir?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 68,
+        pregunta: "¿Qué consecuencia estás considerando con mayor peso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 69,
+        pregunta: "¿Qué información te falta para sentir que puedes decidir con mayor claridad?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 70,
+        pregunta: "¿Qué decisión sería coherente con la persona que quieres ser?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 71,
+        pregunta: "¿Qué estás intentando resolver al mismo tiempo y podrías separar?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 72,
+        pregunta: "¿Qué asunto necesita tu atención primero?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 73,
+        pregunta: "¿Qué puedes postergar sin que eso perjudique tu bienestar?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 74,
+        pregunta: "¿Qué prioridad has dejado de lado por atender las necesidades de otras personas?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 75,
+        pregunta: "¿Qué elección estás haciendo por miedo y cuál harías desde tus necesidades?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 76,
+        pregunta: "¿Qué sería importante considerar además de lo que estás sintiendo ahora?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 77,
+        pregunta: "¿Qué opción te permitiría cuidar mejor tus límites?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 78,
+        pregunta: "¿Qué estás priorizando por costumbre y no necesariamente por necesidad?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 79,
+        pregunta: "¿Qué decisión podría ayudarte a recuperar espacio para ti?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+      {
+        id: 80,
+        pregunta: "Si tuvieras que elegir una sola prioridad para este momento, ¿cuál sería?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Decisiones y prioridades"
+      },
+
+      {
+        id: 81,
+        pregunta: "¿Qué objetivo personal te gustaría trabajar primero?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 82,
+        pregunta: "¿Cómo sabrías que estás avanzando hacia ese objetivo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 83,
+        pregunta: "¿Qué significa para ti alcanzar este objetivo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 84,
+        pregunta: "¿Este objetivo nace de una necesidad propia o de una expectativa externa?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 85,
+        pregunta: "¿Qué cambiaría en tu vida si consiguieras este objetivo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 86,
+        pregunta: "¿Qué parte del objetivo está bajo tu control?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 87,
+        pregunta: "¿Qué primer indicador te mostraría que estás avanzando?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 88,
+        pregunta: "¿Qué necesitas aprender o practicar para acercarte a este objetivo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 89,
+        pregunta: "¿Qué obstáculo personal podría aparecer en el camino?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 90,
+        pregunta: "¿Qué apoyo podrías necesitar para alcanzar este objetivo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 91,
+        pregunta: "¿Qué parte de este objetivo puedes convertir en una acción concreta?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 92,
+        pregunta: "¿Qué expectativas necesitas ajustar para que este objetivo sea realista?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 93,
+        pregunta: "¿Qué te gustaría conseguir para ti independientemente de lo que hagan otras personas?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 94,
+        pregunta: "¿Qué estás dispuesto a hacer de manera diferente para acercarte a este objetivo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 95,
+        pregunta: "¿Qué tendría que cambiar en tu día a día para que este objetivo tenga espacio?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 96,
+        pregunta: "¿Qué te podría hacer abandonar este objetivo y cómo podrías anticiparlo?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 97,
+        pregunta: "¿Qué objetivo sería importante aunque nadie más lo reconociera?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 98,
+        pregunta: "¿Qué necesitas aceptar sobre tu situación actual antes de plantearte el siguiente paso?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 99,
+        pregunta: "¿Qué quieres empezar a construir a partir de este momento?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      },
+      {
+        id: 100,
+        pregunta: "¿Cuál sería un objetivo personal concreto que puedas comenzar a trabajar desde ahora?",
+        modulo: "Módulo 5 · Recursos cambio e integración",
+        etapa: "Orientar",
+        subtema: "Objetivos personales"
+      }
+
+    ];
+
+
+    /* =====================================================
+       ESTADO
+       ===================================================== */
+
+    const preguntasPorPagina = 20;
+
+    let paginaActual = 1;
+    let resultadosActuales = [];
+    let mostrarSoloFavoritas = false;
+    let preguntaModalActual = null;
+
+    let favoritos = JSON.parse(
+      localStorage.getItem("temple_favoritos") || "[]"
+    );
+
+    favoritos = favoritos.map(Number);
+
+
+    /* =====================================================
+       ELEMENTOS
+       ===================================================== */
+
+    const busqueda = document.getElementById("busqueda");
+    const filtroModulo = document.getElementById("filtroModulo");
+    const filtroEtapa = document.getElementById("filtroEtapa");
+    const filtroSubtema = document.getElementById("filtroSubtema");
+
+    const botonFavoritos = document.getElementById("botonFavoritos");
+    const contadorFavoritos = document.getElementById("contadorFavoritos");
+
+    const contadorResultados = document.getElementById("contadorResultados");
+    const textoPagina = document.getElementById("textoPagina");
+
+    const listaPreguntas = document.getElementById("listaPreguntas");
+    const paginacion = document.getElementById("paginacion");
+
+    const modal = document.getElementById("modal");
+    const cerrarModal = document.getElementById("cerrarModal");
+
+    const modalNumero = document.getElementById("modalNumero");
+    const modalPregunta = document.getElementById("modalPregunta");
+    const modalDatos = document.getElementById("modalDatos");
+
+    const modalFavorito = document.getElementById("modalFavorito");
+    const copiarPregunta = document.getElementById("copiarPregunta");
+
+
+    /* =====================================================
+       UTILIDADES
+       ===================================================== */
+
+    function escaparHTML(texto) {
+      return String(texto)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    function esFavorita(id) {
+      return favoritos.includes(Number(id));
+    }
+
+
+    function guardarFavoritos() {
+      localStorage.setItem(
+        "temple_favoritos",
+        JSON.stringify(favoritos)
+      );
+    }
+
+
+    function actualizarContadorFavoritos() {
+      const cantidad = favoritos.length;
+
+      contadorFavoritos.textContent =
+        cantidad === 1
+          ? "1 favorita"
+          : `${cantidad} favoritas`;
+
+      if (mostrarSoloFavoritas) {
+        botonFavoritos.textContent =
+          cantidad === 1
+            ? "★ Mostrando 1 favorita"
+            : `★ Mostrando ${cantidad} favoritas`;
+      } else {
+        botonFavoritos.textContent = "☆ Solo favoritas";
+      }
+
+      botonFavoritos.classList.toggle(
+        "activo",
+        mostrarSoloFavoritas
+      );
+    }
+
+
+    /* =====================================================
+       FILTROS
+       ===================================================== */
+
+    function valoresUnicos(campo) {
+      return [...new Set(
+        preguntas.map(p => p[campo])
+      )].sort();
+    }
+
+
+    function llenarFiltro(select, valores, textoInicial) {
+
+      select.innerHTML =
+        `<option value="">${textoInicial}</option>`;
+
+      valores.forEach(valor => {
+
+        const option = document.createElement("option");
+
+        option.value = valor;
+        option.textContent = valor;
+
+        select.appendChild(option);
+
+      });
+    }
+
+
+    function prepararFiltros() {
+
+      llenarFiltro(
+        filtroModulo,
+        valoresUnicos("modulo"),
+        "Todos los módulos"
+      );
+
+      llenarFiltro(
+        filtroEtapa,
+        valoresUnicos("etapa"),
+        "Todas las etapas"
+      );
+
+      llenarFiltro(
+        filtroSubtema,
+        valoresUnicos("subtema"),
+        "Todos los subtemas"
+      );
+    }
+
+
+    /* =====================================================
+       FILTRADO
+       ===================================================== */
+
+    function obtenerResultados() {
+
+      const texto = busqueda.value
+        .trim()
+        .toLowerCase();
+
+      const modulo = filtroModulo.value;
+      const etapa = filtroEtapa.value;
+      const subtema = filtroSubtema.value;
+
+      resultadosActuales = preguntas.filter(p => {
+
+        const coincideTexto =
+          !texto ||
+          p.pregunta.toLowerCase().includes(texto) ||
+          p.modulo.toLowerCase().includes(texto) ||
+          p.etapa.toLowerCase().includes(texto) ||
+          p.subtema.toLowerCase().includes(texto);
+
+        const coincideModulo =
+          !modulo || p.modulo === modulo;
+
+        const coincideEtapa =
+          !etapa || p.etapa === etapa;
+
+        const coincideSubtema =
+          !subtema || p.subtema === subtema;
+
+        const coincideFavorito =
+          !mostrarSoloFavoritas || esFavorita(p.id);
+
+        return (
+          coincideTexto &&
+          coincideModulo &&
+          coincideEtapa &&
+          coincideSubtema &&
+          coincideFavorito
+        );
+
+      });
+
+    }
+
+
+    function actualizarResultados(resetearPagina = true) {
+
+      obtenerResultados();
+
+      if (resetearPagina) {
+        paginaActual = 1;
+      }
+
+      const totalPaginas =
+        Math.max(
+          1,
+          Math.ceil(
+            resultadosActuales.length /
+            preguntasPorPagina
+          )
+        );
+
+      if (paginaActual > totalPaginas) {
+        paginaActual = totalPaginas;
+      }
+
+      renderizarPreguntas();
+      renderizarPaginacion();
+      actualizarContadorFavoritos();
+
+    }
+
+
+    /* =====================================================
+       PREGUNTAS
+       ===================================================== */
+
+    function renderizarPreguntas() {
+
+      listaPreguntas.innerHTML = "";
+
+      const inicio =
+        (paginaActual - 1) *
+        preguntasPorPagina;
+
+      const fin =
+        inicio + preguntasPorPagina;
+
+      const pagina =
+        resultadosActuales.slice(inicio, fin);
+
+
+      contadorResultados.textContent =
+        resultadosActuales.length === 1
+          ? "1 pregunta"
+          : `${resultadosActuales.length} preguntas`;
+
+
+      if (resultadosActuales.length === 0) {
+
+        textoPagina.textContent = "";
+
+        listaPreguntas.innerHTML = `
+          <div class="sin-resultados">
+            <div class="sin-resultados-icono">🔎</div>
+            <h3>No encontramos preguntas</h3>
+            <p>
+              Prueba modificando la búsqueda o alguno de los filtros.
+            </p>
+          </div>
+        `;
+
+        return;
+      }
+
+
+      const totalPaginas =
+        Math.ceil(
+          resultadosActuales.length /
+          preguntasPorPagina
+        );
+
+      textoPagina.textContent =
+        `Página ${paginaActual} de ${totalPaginas}`;
+
+
+      pagina.forEach(p => {
+
+        const favorita = esFavorita(p.id);
+
+        const tarjeta =
+          document.createElement("article");
+
+        tarjeta.className = "tarjeta";
+
+        tarjeta.innerHTML = `
+
+          <button
+            class="estrella-tarjeta ${favorita ? "activa" : ""}"
+            type="button"
+            aria-label="${favorita ? "Quitar de favoritas" : "Agregar a favoritas"}"
+            title="${favorita ? "Quitar de favoritas" : "Agregar a favoritas"}"
+            data-id="${p.id}"
+          >
+            ${favorita ? "★" : "☆"}
+          </button>
+
+          <div class="numero-pregunta">
+            PREGUNTA ${p.id}
+          </div>
+
+          <p class="pregunta-texto">
+            ${escaparHTML(p.pregunta)}
+          </p>
+
+          <div class="etiquetas">
+            <span class="etiqueta">
+              ${escaparHTML(p.modulo)}
+            </span>
+
+            <span class="etiqueta">
+              ${escaparHTML(p.etapa)}
+            </span>
+
+            <span class="etiqueta">
+              ${escaparHTML(p.subtema)}
+            </span>
+          </div>
+
+          <button
+            class="boton-ver"
+            type="button"
+            data-id="${p.id}"
+          >
+            Ver pregunta
+          </button>
+
+        `;
+
+        listaPreguntas.appendChild(tarjeta);
+
+      });
+
+
+      document
+        .querySelectorAll(".estrella-tarjeta")
+        .forEach(btn => {
+
+          btn.addEventListener(
+            "click",
+            function(event) {
+
+              event.stopPropagation();
+
+              cambiarFavorito(
+                Number(this.dataset.id)
+              );
+
+            }
+          );
+
+        });
+
+
+      document
+        .querySelectorAll(".boton-ver")
+        .forEach(btn => {
+
+          btn.addEventListener(
+            "click",
+            function() {
+
+              abrirModal(
+                Number(this.dataset.id)
+              );
+
+            }
+          );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       FAVORITOS
+       ===================================================== */
+
+    function cambiarFavorito(id) {
+
+      id = Number(id);
+
+      if (esFavorita(id)) {
+
+        favoritos =
+          favoritos.filter(
+            favorito => favorito !== id
+          );
+
+      } else {
+
+        favoritos.push(id);
+
+      }
+
+      guardarFavoritos();
+
+      actualizarResultados(false);
+
+      if (
+        preguntaModalActual &&
+        Number(preguntaModalActual.id) === id
+      ) {
+        actualizarModalFavorito();
+      }
+
+    }
+
+
+    botonFavoritos.addEventListener(
+      "click",
+      function() {
+
+        mostrarSoloFavoritas =
+          !mostrarSoloFavoritas;
+
+        paginaActual = 1;
+
+        actualizarResultados(false);
+
+      }
+    );
+
+
+    /* =====================================================
+       MODAL
+       ===================================================== */
+
+    function abrirModal(id) {
+
+      const pregunta =
+        preguntas.find(
+          p => Number(p.id) === Number(id)
+        );
+
+      if (!pregunta) return;
+
+      preguntaModalActual = pregunta;
+
+      modalNumero.textContent =
+        `PREGUNTA ${pregunta.id}`;
+
+      modalPregunta.textContent =
+        pregunta.pregunta;
+
+      modalDatos.innerHTML = `
+
+        <span class="etiqueta">
+          ${escaparHTML(pregunta.modulo)}
+        </span>
+
+        <span class="etiqueta">
+          ${escaparHTML(pregunta.etapa)}
+        </span>
+
+        <span class="etiqueta">
+          ${escaparHTML(pregunta.subtema)}
+        </span>
+
+      `;
+
+      actualizarModalFavorito();
+
+      copiarPregunta.textContent =
+        "📋 Copiar pregunta";
+
+      modal.classList.add("visible");
+
+      document.body.style.overflow = "hidden";
+
+    }
+
+
+    function actualizarModalFavorito() {
+
+      if (!preguntaModalActual) return;
+
+      const favorita =
+        esFavorita(preguntaModalActual.id);
+
+      if (favorita) {
+
+        modalFavorito.textContent =
+          "★ Quitar de favoritas";
+
+      } else {
+
+        modalFavorito.textContent =
+          "☆ Agregar a favoritas";
+
+      }
+
+      modalFavorito.classList.toggle(
+        "activa",
+        favorita
+      );
+
+    }
+
+
+    function cerrarElModal() {
+
+      modal.classList.remove("visible");
+
+      document.body.style.overflow = "";
+
+      preguntaModalActual = null;
+
+    }
+
+
+    cerrarModal.addEventListener(
+      "click",
+      cerrarElModal
+    );
+
+
+    modal.addEventListener(
+      "click",
+      function(event) {
+
+        if (event.target === modal) {
+          cerrarElModal();
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Escape" &&
+          modal.classList.contains("visible")
+        ) {
+          cerrarElModal();
+        }
+
+      }
+    );
+
+
+    modalFavorito.addEventListener(
+      "click",
+      function() {
+
+        if (!preguntaModalActual) return;
+
+        cambiarFavorito(
+          preguntaModalActual.id
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       COPIAR
+       ===================================================== */
+
+    copiarPregunta.addEventListener(
+      "click",
+      async function() {
+
+        if (!preguntaModalActual) return;
+
+        const texto =
+          preguntaModalActual.pregunta;
+
+        try {
+
+          await navigator.clipboard.writeText(texto);
+
+          copiarPregunta.textContent =
+            "✓ Copiada";
+
+          setTimeout(() => {
+
+            if (modal.classList.contains("visible")) {
+              copiarPregunta.textContent =
+                "📋 Copiar pregunta";
+            }
+
+          }, 1600);
+
+        } catch (error) {
+
+          const textarea =
+            document.createElement("textarea");
+
+          textarea.value = texto;
+
+          document.body.appendChild(textarea);
+
+          textarea.select();
+
+          document.execCommand("copy");
+
+          textarea.remove();
+
+          copiarPregunta.textContent =
+            "✓ Copiada";
+
+          setTimeout(() => {
+
+            if (modal.classList.contains("visible")) {
+              copiarPregunta.textContent =
+                "📋 Copiar pregunta";
+            }
+
+          }, 1600);
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       PAGINACIÓN
+       ===================================================== */
+
+    function renderizarPaginacion() {
+
+      paginacion.innerHTML = "";
+
+      if (resultadosActuales.length === 0) {
+        return;
+      }
+
+      const totalPaginas =
+        Math.ceil(
+          resultadosActuales.length /
+          preguntasPorPagina
+        );
+
+      if (totalPaginas <= 1) {
+        return;
+      }
+
+
+      const anterior =
+        document.createElement("button");
+
+      anterior.className =
+        "boton-pagina";
+
+      anterior.textContent =
+        "← Anterior";
+
+      anterior.disabled =
+        paginaActual === 1;
+
+      anterior.addEventListener(
+        "click",
+        function() {
+
+          if (paginaActual > 1) {
+
+            paginaActual--;
+
+            renderizarPreguntas();
+            renderizarPaginacion();
+
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+
+          }
+
+        }
+      );
+
+
+      const paginaInfo =
+        document.createElement("span");
+
+      paginaInfo.className =
+        "pagina-info";
+
+      paginaInfo.textContent =
+        `Página ${paginaActual} de ${totalPaginas}`;
+
+
+      const siguiente =
+        document.createElement("button");
+
+      siguiente.className =
+        "boton-pagina";
+
+      siguiente.textContent =
+        "Siguiente →";
+
+      siguiente.disabled =
+        paginaActual === totalPaginas;
+
+      siguiente.addEventListener(
+        "click",
+        function() {
+
+          if (paginaActual < totalPaginas) {
+
+            paginaActual++;
+
+            renderizarPreguntas();
+            renderizarPaginacion();
+
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+
+          }
+
+        }
+      );
+
+
+      paginacion.appendChild(anterior);
+      paginacion.appendChild(paginaInfo);
+      paginacion.appendChild(siguiente);
+
+    }
+
+
+    /* =====================================================
+       EVENTOS DE FILTROS
+       ===================================================== */
+
+    busqueda.addEventListener(
+      "input",
+      function() {
+        actualizarResultados(true);
+      }
+    );
+
+
+    filtroModulo.addEventListener(
+      "change",
+      function() {
+        actualizarResultados(true);
+      }
+    );
+
+
+    filtroEtapa.addEventListener(
+      "change",
+      function() {
+        actualizarResultados(true);
+      }
+    );
+
+
+    filtroSubtema.addEventListener(
+      "change",
+      function() {
+        actualizarResultados(true);
+      }
+    );
+
+
+    /* =====================================================
+       INICIO
+       ===================================================== */
+
+    prepararFiltros();
+
+    actualizarContadorFavoritos();
+
+    actualizarResultados(true);
+
+  </script>
+
+</body>
+</html>
