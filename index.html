@@ -837,7 +837,6 @@
        ===================================================== */
 
     const preguntas = [];
-const preguntasVistas = new Set();
 
 function agregarPregunta(
   pregunta,
@@ -845,12 +844,6 @@ function agregarPregunta(
   etapa,
   subtema
 ) {
-  const clave = pregunta.trim();
-
-  // Omitir únicamente preguntas exactamente iguales
-  if (preguntasVistas.has(clave)) return;
-
-  preguntasVistas.add(clave);
 
   preguntas.push({
     id: preguntas.length + 1,
