@@ -836,7 +836,7 @@
        DATOS
        ===================================================== */
 
-    const preguntas = [];
+  const preguntas = [];
 
 function agregarPregunta(
   pregunta,
@@ -844,6 +844,12 @@ function agregarPregunta(
   etapa,
   subtema
 ) {
+
+  const duplicada = preguntas.some(
+    p => p.pregunta.trim() === pregunta.trim()
+  );
+
+  if (duplicada) return;
 
   preguntas.push({
     id: preguntas.length + 1,
@@ -853,7 +859,7 @@ function agregarPregunta(
     subtema: subtema
   });
 }
-
+    
    agregarPregunta(
   "¿Qué consideras que ha sido lo más importante que has descubierto sobre ti durante este proceso?",
   "Módulo 5 · Recursos cambio e integración",
