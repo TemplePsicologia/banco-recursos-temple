@@ -33,6 +33,7 @@
     }
 
     /* HEADER */
+
     header {
       background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
       color: white;
@@ -51,6 +52,7 @@
     }
 
     /* CONTENEDOR */
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -58,6 +60,7 @@
     }
 
     /* BUSCADOR */
+
     .search-box {
       margin-bottom: 20px;
     }
@@ -80,6 +83,7 @@
     }
 
     /* FILTROS */
+
     .filters {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -104,6 +108,7 @@
     }
 
     /* CONTADOR */
+
     .results-info {
       margin-bottom: 20px;
       color: var(--texto-suave);
@@ -111,6 +116,7 @@
     }
 
     /* GRID */
+
     .questions-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -118,6 +124,7 @@
     }
 
     /* TARJETA */
+
     .card {
       background: var(--blanco);
       border: 1px solid var(--azul-borde);
@@ -146,6 +153,7 @@
     }
 
     /* ETIQUETAS */
+
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -162,7 +170,8 @@
       line-height: 1.3;
     }
 
-    /* BOTÓN */
+    /* BOTÓN VER PREGUNTA */
+
     .view-button {
       width: 100%;
       border: none;
@@ -181,6 +190,7 @@
     }
 
     /* SIN RESULTADOS */
+
     .no-results {
       grid-column: 1 / -1;
       background: white;
@@ -192,6 +202,7 @@
     }
 
     /* MODAL */
+
     .modal {
       display: none;
       position: fixed;
@@ -232,6 +243,8 @@
       }
     }
 
+    /* CERRAR */
+
     .close-button {
       position: absolute;
       top: 15px;
@@ -251,6 +264,8 @@
       background: var(--azul-borde);
     }
 
+    /* CONTENIDO MODAL */
+
     .modal-number {
       color: var(--azul);
       font-size: 12px;
@@ -264,9 +279,37 @@
       font-size: 23px;
       line-height: 1.45;
       color: var(--texto);
-      margin-bottom: 25px;
+      margin-bottom: 22px;
       padding-right: 20px;
     }
+
+    /* BOTÓN COPIAR */
+
+    .copy-button {
+      width: 100%;
+      border: 1px solid var(--azul-borde);
+      border-radius: 9px;
+      padding: 11px 15px;
+      background: var(--celeste);
+      color: var(--azul-oscuro);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-bottom: 25px;
+    }
+
+    .copy-button:hover {
+      background: var(--azul-borde);
+    }
+
+    .copy-button.copied {
+      background: #E3F2E8;
+      border-color: #B9D8C1;
+      color: #356342;
+    }
+
+    /* DETALLES */
 
     .modal-details {
       border-top: 1px solid var(--azul-borde);
@@ -293,7 +336,9 @@
     }
 
     /* RESPONSIVE */
+
     @media (max-width: 800px) {
+
       .questions-grid {
         grid-template-columns: 1fr;
       }
@@ -308,6 +353,7 @@
     }
 
     @media (max-width: 500px) {
+
       .container {
         padding: 20px 15px 40px;
       }
@@ -328,6 +374,7 @@
         font-size: 20px;
       }
     }
+
   </style>
 </head>
 
@@ -338,18 +385,24 @@
     <p>Explora y encuentra preguntas para tu práctica profesional</p>
   </header>
 
+
   <main class="container">
 
     <!-- BUSCADOR -->
+
     <div class="search-box">
+
       <input
         type="text"
         id="searchInput"
         placeholder="🔎 Buscar una pregunta..."
       >
+
     </div>
 
+
     <!-- FILTROS -->
+
     <div class="filters">
 
       <select id="moduloFilter">
@@ -366,16 +419,21 @@
 
     </div>
 
+
     <!-- CONTADOR -->
+
     <div class="results-info" id="resultsInfo"></div>
 
+
     <!-- RESULTADOS -->
+
     <div class="questions-grid" id="questionsGrid"></div>
 
   </main>
 
 
   <!-- MODAL -->
+
   <div class="modal" id="questionModal">
 
     <div class="modal-content">
@@ -388,25 +446,66 @@
         ×
       </button>
 
+
       <div class="modal-number" id="modalNumber"></div>
 
+
       <div class="modal-question" id="modalQuestion"></div>
+
+
+      <!-- BOTÓN COPIAR -->
+
+      <button
+        class="copy-button"
+        id="copyButton"
+      >
+        📋 Copiar pregunta
+      </button>
+
+
+      <!-- DETALLES -->
 
       <div class="modal-details">
 
         <div class="detail">
-          <span class="detail-label">Módulo</span>
-          <span class="detail-value" id="modalModulo"></span>
+
+          <span class="detail-label">
+            Módulo
+          </span>
+
+          <span
+            class="detail-value"
+            id="modalModulo"
+          ></span>
+
         </div>
 
-        <div class="detail">
-          <span class="detail-label">Etapa</span>
-          <span class="detail-value" id="modalEtapa"></span>
-        </div>
 
         <div class="detail">
-          <span class="detail-label">Subtema</span>
-          <span class="detail-value" id="modalSubtema"></span>
+
+          <span class="detail-label">
+            Etapa
+          </span>
+
+          <span
+            class="detail-value"
+            id="modalEtapa"
+          ></span>
+
+        </div>
+
+
+        <div class="detail">
+
+          <span class="detail-label">
+            Subtema
+          </span>
+
+          <span
+            class="detail-value"
+            id="modalSubtema"
+          ></span>
+
         </div>
 
       </div>
@@ -1245,21 +1344,54 @@
        ELEMENTOS
        ===================================================== */
 
-    const searchInput = document.getElementById("searchInput");
-    const moduloFilter = document.getElementById("moduloFilter");
-    const etapaFilter = document.getElementById("etapaFilter");
-    const subtemaFilter = document.getElementById("subtemaFilter");
-    const questionsGrid = document.getElementById("questionsGrid");
-    const resultsInfo = document.getElementById("resultsInfo");
+    const searchInput =
+      document.getElementById("searchInput");
 
-    const questionModal = document.getElementById("questionModal");
-    const closeModal = document.getElementById("closeModal");
+    const moduloFilter =
+      document.getElementById("moduloFilter");
 
-    const modalNumber = document.getElementById("modalNumber");
-    const modalQuestion = document.getElementById("modalQuestion");
-    const modalModulo = document.getElementById("modalModulo");
-    const modalEtapa = document.getElementById("modalEtapa");
-    const modalSubtema = document.getElementById("modalSubtema");
+    const etapaFilter =
+      document.getElementById("etapaFilter");
+
+    const subtemaFilter =
+      document.getElementById("subtemaFilter");
+
+    const questionsGrid =
+      document.getElementById("questionsGrid");
+
+    const resultsInfo =
+      document.getElementById("resultsInfo");
+
+    const questionModal =
+      document.getElementById("questionModal");
+
+    const closeModal =
+      document.getElementById("closeModal");
+
+    const copyButton =
+      document.getElementById("copyButton");
+
+    const modalNumber =
+      document.getElementById("modalNumber");
+
+    const modalQuestion =
+      document.getElementById("modalQuestion");
+
+    const modalModulo =
+      document.getElementById("modalModulo");
+
+    const modalEtapa =
+      document.getElementById("modalEtapa");
+
+    const modalSubtema =
+      document.getElementById("modalSubtema");
+
+
+    /* =====================================================
+       PREGUNTA ACTUAL
+       ===================================================== */
+
+    let preguntaActual = "";
 
 
     /* =====================================================
@@ -1268,11 +1400,13 @@
 
     function llenarFiltro(select, valores) {
 
-      const valoresUnicos = [...new Set(valores)].sort();
+      const valoresUnicos =
+        [...new Set(valores)].sort();
 
       valoresUnicos.forEach(valor => {
 
-        const option = document.createElement("option");
+        const option =
+          document.createElement("option");
 
         option.value = valor;
         option.textContent = valor;
@@ -1282,6 +1416,7 @@
       });
 
     }
+
 
     llenarFiltro(
       moduloFilter,
@@ -1305,37 +1440,49 @@
 
     function mostrarPreguntas() {
 
-      const texto = searchInput.value
-        .toLowerCase()
-        .trim();
+      const texto =
+        searchInput.value
+          .toLowerCase()
+          .trim();
 
-      const modulo = moduloFilter.value;
-      const etapa = etapaFilter.value;
-      const subtema = subtemaFilter.value;
+      const modulo =
+        moduloFilter.value;
+
+      const etapa =
+        etapaFilter.value;
+
+      const subtema =
+        subtemaFilter.value;
 
 
-      const resultados = preguntas.filter(p => {
+      const resultados =
+        preguntas.filter(p => {
 
-        const coincideTexto =
-          p.pregunta.toLowerCase().includes(texto);
+          const coincideTexto =
+            p.pregunta
+              .toLowerCase()
+              .includes(texto);
 
-        const coincideModulo =
-          !modulo || p.modulo === modulo;
+          const coincideModulo =
+            !modulo ||
+            p.modulo === modulo;
 
-        const coincideEtapa =
-          !etapa || p.etapa === etapa;
+          const coincideEtapa =
+            !etapa ||
+            p.etapa === etapa;
 
-        const coincideSubtema =
-          !subtema || p.subtema === subtema;
+          const coincideSubtema =
+            !subtema ||
+            p.subtema === subtema;
 
-        return (
-          coincideTexto &&
-          coincideModulo &&
-          coincideEtapa &&
-          coincideSubtema
-        );
+          return (
+            coincideTexto &&
+            coincideModulo &&
+            coincideEtapa &&
+            coincideSubtema
+          );
 
-      });
+        });
 
 
       resultsInfo.textContent =
@@ -1354,14 +1501,17 @@
         `;
 
         return;
+
       }
 
 
       resultados.forEach(p => {
 
-        const card = document.createElement("div");
+        const card =
+          document.createElement("div");
 
         card.className = "card";
+
 
         card.innerHTML = `
 
@@ -1398,6 +1548,7 @@
 
         `;
 
+
         questionsGrid.appendChild(card);
 
       });
@@ -1411,9 +1562,15 @@
 
     function abrirPregunta(id) {
 
-      const pregunta = preguntas.find(p => p.id === id);
+      const pregunta =
+        preguntas.find(p => p.id === id);
 
       if (!pregunta) return;
+
+
+      preguntaActual =
+        pregunta.pregunta;
+
 
       modalNumber.textContent =
         `PREGUNTA ${pregunta.id}`;
@@ -1431,11 +1588,95 @@
         pregunta.subtema;
 
 
+      /* Restablecer botón */
+
+      copyButton.textContent =
+        "📋 Copiar pregunta";
+
+      copyButton.classList.remove("copied");
+
+
       questionModal.classList.add("active");
 
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow =
+        "hidden";
 
     }
+
+
+    /* =====================================================
+       COPIAR PREGUNTA
+       ===================================================== */
+
+    copyButton.addEventListener(
+      "click",
+      async function() {
+
+        if (!preguntaActual) return;
+
+
+        try {
+
+          await navigator.clipboard.writeText(
+            preguntaActual
+          );
+
+
+          copyButton.textContent =
+            "✓ Copiada";
+
+          copyButton.classList.add("copied");
+
+
+          setTimeout(() => {
+
+            copyButton.textContent =
+              "📋 Copiar pregunta";
+
+            copyButton.classList.remove("copied");
+
+          }, 1800);
+
+
+        } catch (error) {
+
+          /* Alternativa para navegadores
+             que no permitan clipboard */
+
+          const textarea =
+            document.createElement("textarea");
+
+          textarea.value =
+            preguntaActual;
+
+          document.body.appendChild(textarea);
+
+          textarea.select();
+
+          document.execCommand("copy");
+
+          textarea.remove();
+
+
+          copyButton.textContent =
+            "✓ Copiada";
+
+          copyButton.classList.add("copied");
+
+
+          setTimeout(() => {
+
+            copyButton.textContent =
+              "📋 Copiar pregunta";
+
+            copyButton.classList.remove("copied");
+
+          }, 1800);
+
+        }
+
+      }
+    );
 
 
     /* =====================================================
@@ -1458,12 +1699,17 @@
 
 
     /* Cerrar haciendo clic fuera */
+
     questionModal.addEventListener(
       "click",
       function(event) {
 
-        if (event.target === questionModal) {
+        if (
+          event.target === questionModal
+        ) {
+
           cerrarPregunta();
+
         }
 
       }
@@ -1471,6 +1717,7 @@
 
 
     /* Cerrar con ESC */
+
     document.addEventListener(
       "keydown",
       function(event) {
@@ -1479,7 +1726,9 @@
           event.key === "Escape" &&
           questionModal.classList.contains("active")
         ) {
+
           cerrarPregunta();
+
         }
 
       }
@@ -1487,7 +1736,7 @@
 
 
     /* =====================================================
-       EVENTOS DE FILTROS Y BUSCADOR
+       EVENTOS DE BUSCADOR Y FILTROS
        ===================================================== */
 
     searchInput.addEventListener(
