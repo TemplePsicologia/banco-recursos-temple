@@ -1,451 +1,1140 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banco de Preguntas Temple</title>
 
-    <title>Banco de Preguntas Temple</title>
+<style>
+:root {
+  --azul-oscuro: #2F5573;
+  --azul: #4C78A0;
+  --azul-medio: #6FA3C8;
+  --celeste: #DCECF7;
+  --celeste-claro: #F4FAFD;
+  --azul-borde: #B8D4E8;
+  --texto: #263746;
+  --texto-suave: #607789;
+  --blanco: #FFFFFF;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+* {
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #F7F5F1;
-            color: #2F3D35;
-        }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(
+    180deg,
+    #EAF5FB 0%,
+    #F7FBFD 45%,
+    #FFFFFF 100%
+  );
+  color: var(--texto);
+}
 
-        header {
-            background: #476253;
-            color: white;
-            text-align: center;
-            padding: 50px 20px;
-        }
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
 
-        header h1 {
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
+header {
+  background: linear-gradient(135deg, #2F5573, #5F8FB5);
+  color: white;
+  padding: 34px;
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(47, 85, 115, 0.16);
+  margin-bottom: 24px;
+}
 
-        header p {
-            font-size: 16px;
-        }
+h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: 35px auto;
-            padding: 0 20px;
-        }
+.subtitle {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 16px;
+}
 
-        .search-panel {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-            margin-bottom: 30px;
-        }
+.controls {
+  background: white;
+  padding: 22px;
+  border: 1px solid var(--azul-borde);
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(47, 85, 115, 0.07);
+  margin-bottom: 24px;
+}
 
-        .search-input {
-            width: 100%;
-            padding: 16px;
-            border: 1px solid #D8D8D8;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-        }
+.search {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--azul-borde);
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 16px;
+}
 
-        .search-input:focus {
-            border-color: #476253;
-        }
+.search:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(76, 120, 160, 0.12);
+}
 
-        .filters {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
 
-        select {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #D8D8D8;
-            border-radius: 10px;
-            background: white;
-            font-size: 15px;
-            color: #2F3D35;
-        }
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--azul-borde);
+  border-radius: 10px;
+  background: var(--celeste-claro);
+  color: var(--texto);
+  font-size: 14px;
+  cursor: pointer;
+}
 
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
+.count {
+  margin: 18px 0 14px;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
 
-        .results-header h2 {
-            font-size: 23px;
-        }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
 
-        #resultCount {
-            color: #6B746E;
-            font-size: 14px;
-        }
+.card {
+  background: white;
+  border: 1px solid var(--azul-borde);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(47, 85, 115, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
 
-        .results {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(47, 85, 115, 0.10);
+}
 
-        .card {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-        }
+.number {
+  display: inline-block;
+  background: var(--celeste);
+  color: var(--azul-oscuro);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 9px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
 
-        .question-number {
-            font-size: 13px;
-            color: #476253;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
+.question {
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
 
-        .question {
-            font-size: 18px;
-            line-height: 1.5;
-            margin-bottom: 18px;
-        }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
 
-        .metadata {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
+.tag {
+  background: var(--celeste-claro);
+  border: 1px solid var(--azul-borde);
+  color: var(--azul-oscuro);
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+}
 
-        .tag {
-            background: #E8EEE9;
-            color: #476253;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
+.empty {
+  grid-column: 1 / -1;
+  background: white;
+  border: 1px dashed var(--azul-borde);
+  border-radius: 16px;
+  padding: 35px;
+  text-align: center;
+  color: var(--texto-suave);
+}
 
-        .empty {
-            background: white;
-            padding: 35px;
-            border-radius: 16px;
-            text-align: center;
-            color: #6B746E;
-        }
+@media (max-width: 760px) {
+  .container {
+    padding: 20px 14px 40px;
+  }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #6B746E;
-            font-size: 14px;
-        }
+  header {
+    padding: 26px 22px;
+  }
 
-        @media (max-width: 750px) {
+  h1 {
+    font-size: 26px;
+  }
 
-            .filters,
-            .results {
-                grid-template-columns: 1fr;
-            }
-
-            header h1 {
-                font-size: 27px;
-            }
-
-            .question {
-                font-size: 17px;
-            }
-        }
-    </style>
+  .filters,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
+<div class="container">
+
 <header>
-    <h1>Banco de Preguntas Temple</h1>
-    <p>Explora y encuentra preguntas para tu práctica profesional</p>
+  <h1>Banco de Preguntas Temple</h1>
+  <p class="subtitle">
+    Explora y encuentra preguntas para tu práctica profesional
+  </p>
 </header>
 
-<main class="container">
+<section class="controls">
 
-    <section class="search-panel">
+  <input
+    id="search"
+    class="search"
+    type="text"
+    placeholder="🔎 Buscar una pregunta..."
+  >
 
-        <input
-            type="text"
-            id="search"
-            class="search-input"
-            placeholder="🔎 Buscar una pregunta..."
-        >
+  <div class="filters">
 
-        <div class="filters">
+    <select id="moduleFilter">
+      <option value="">Todos los módulos</option>
+    </select>
 
-            <select id="moduleFilter">
-                <option value="">Todos los módulos</option>
-            </select>
+    <select id="stageFilter">
+      <option value="">Todas las etapas</option>
+    </select>
 
-            <select id="stageFilter">
-                <option value="">Todas las etapas</option>
-            </select>
+    <select id="subtopicFilter">
+      <option value="">Todos los subtemas</option>
+    </select>
 
-            <select id="topicFilter">
-                <option value="">Todos los subtemas</option>
-            </select>
+  </div>
 
-        </div>
+</section>
 
-    </section>
+<div id="count" class="count"></div>
 
-    <section>
+<div id="results" class="grid"></div>
 
-        <div class="results-header">
-            <h2>Preguntas</h2>
-            <span id="resultCount"></span>
-        </div>
-
-        <div id="results" class="results"></div>
-
-    </section>
-
-</main>
-
-<footer>
-    Temple · Banco Interactivo de Preguntas
-</footer>
+</div>
 
 
 <script>
 
-const questions = [
+const preguntas = [
 
-    {
-        text: "¿Qué situación reciente te hizo sentir orgulloso/a de ti?",
-        module: "Autoconocimiento",
-        stage: "Exploración",
-        topic: "Recursos personales"
-    },
+{
+pregunta:"¿Qué consideras que ha sido lo más importante que has descubierto sobre ti durante este proceso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué suele pasar por tu mente cuando cometes un error?",
-        module: "Autoconocimiento",
-        stage: "Exploración",
-        topic: "Autocrítica"
-    },
+{
+pregunta:"¿Qué aprendizaje quieres conservar especialmente a partir de todo lo trabajado?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Cómo notas que una emoción está empezando a intensificarse?",
-        module: "Emociones",
-        stage: "Exploración",
-        topic: "Reconocimiento emocional"
-    },
+{
+pregunta:"¿Qué ha cambiado en tu manera de comprender aquello que estabas viviendo al inicio?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué haces habitualmente cuando sientes preocupación?",
-        module: "Emociones",
-        stage: "Comprensión",
-        topic: "Afrontamiento"
-    },
+{
+pregunta:"¿Qué recurso personal reconoces ahora con mayor claridad?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué necesitas de los demás cuando estás pasando por un momento difícil?",
-        module: "Relaciones",
-        stage: "Exploración",
-        topic: "Necesidades"
-    },
+{
+pregunta:"¿Qué necesidad has aprendido a identificar con mayor facilidad?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué suele ayudarte a sentirte escuchado/a en una conversación?",
-        module: "Relaciones",
-        stage: "Comprensión",
-        topic: "Comunicación"
-    },
+{
+pregunta:"¿Qué conducta o forma de responder te gustaría continuar modificando?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué pensamiento aparece con mayor frecuencia cuando dudas de tus capacidades?",
-        module: "Autoconocimiento",
-        stage: "Comprensión",
-        topic: "Creencias"
-    },
+{
+pregunta:"¿Qué cambio realizado hasta ahora valoras especialmente, aunque todavía esté en proceso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué has aprendido de una situación que inicialmente consideraste difícil?",
-        module: "Autoconocimiento",
-        stage: "Integración",
-        topic: "Aprendizajes"
-    },
+{
+pregunta:"¿Qué aspecto de tu experiencia todavía consideras necesario seguir explorando?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué diferencia notas entre lo que necesitas y lo que esperas de los demás?",
-        module: "Relaciones",
-        stage: "Integración",
-        topic: "Necesidades"
-    },
+{
+pregunta:"¿Qué has aprendido sobre aquello que puedes controlar y aquello que necesitas aceptar?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
 
-    {
-        text: "¿Qué estrategia te ha ayudado anteriormente a afrontar una situación difícil?",
-        module: "Emociones",
-        stage: "Integración",
-        topic: "Afrontamiento"
-    }
+{
+pregunta:"¿Qué decisión o prioridad actual refleja mejor lo que has aprendido sobre ti?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué recurso o estrategia quieres seguir utilizando en situaciones futuras?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué señales te ayudarán a reconocer cuándo necesitas volver a prestar atención a aquello que has trabajado?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué te gustaría hacer diferente si en el futuro vuelves a encontrarte ante una situación similar?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué parte del proceso consideras que todavía necesita tiempo, práctica o acompañamiento?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué quieres conservar de tu manera actual de afrontar las dificultades?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué quieres seguir construyendo a partir de lo que has aprendido?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"Si pudieras hablar con la versión de ti que estaba comenzando este proceso, ¿qué te gustaría que supiera ahora?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué decisión concreta puedes tomar para continuar cuidando aquello que has identificado como importante para ti?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"¿Qué te gustaría recordar cuando atravieses nuevamente un momento de dificultad?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+{
+pregunta:"Después de integrar todo lo trabajado, ¿qué te llevas de este proceso y hacia dónde quieres dirigir tus próximos pasos?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Cierre e integración"
+},
+
+
+/* SOSTENIMIENTO DEL CAMBIO */
+
+{
+pregunta:"¿Qué necesitarías para mantener el cambio que estás comenzando a realizar?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué recursos podrían ayudarte cuando disminuya tu motivación?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué situaciones podrían aumentar el riesgo de volver a tu patrón anterior?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué señales tempranas podrían indicarte que estás regresando a una forma de actuar que ya querías modificar?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué podrías hacer cuando reconozcas alguna de esas señales?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué condiciones necesitas mantener para que el cambio continúe siendo sostenible?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué personas podrían ayudarte a mantener los cambios que consideras importantes?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué hábitos o rutinas podrían facilitar que la nueva conducta se vuelva más estable?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué podría hacer que el cambio resulte difícil de mantener a largo plazo?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Cómo podrías adaptar tu estrategia cuando cambien tus circunstancias?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué diferencia existe entre mantener un cambio de manera flexible y exigirte hacerlo perfectamente?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué podrías aprender de un momento en el que vuelvas temporalmente a una conducta anterior?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué podrías hacer para retomar el proceso después de una dificultad sin considerarla un fracaso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué señales te indicarían que una estrategia ya no está funcionando como antes?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué necesitarías modificar si las condiciones que inicialmente facilitaron el cambio dejan de estar disponibles?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué recurso te gustaría tener presente para los momentos en los que resulte más difícil sostener lo que has construido?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué aspectos del cambio dependen de mantener determinadas decisiones o límites?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Cómo podrías revisar periódicamente si aquello que estás haciendo continúa siendo útil para ti?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"¿Qué te gustaría recordar sobre tu proceso cuando aparezcan momentos de duda o dificultad?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+{
+pregunta:"Después de considerar cómo sostener el cambio, ¿qué necesitas mantener, ajustar o preparar para continuar avanzando?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Sostenimiento del cambio"
+},
+
+
+/* PRIMEROS PASOS */
+
+{
+pregunta:"¿Cuál sería el primer paso concreto que podrías dar para acercarte a tu objetivo?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué podrías hacer durante los próximos días que represente un avance hacia aquello que quieres conseguir?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué acción pequeña podrías realizar incluso si todavía no te sientes completamente preparado/a?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué necesitas organizar antes de comenzar?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué recurso podrías utilizar para facilitar este primer paso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué momento o situación sería más adecuado para comenzar?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué parte del objetivo puedes convertir en una acción concreta?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué podrías hacer hoy que reduzca un poco la distancia entre tu situación actual y aquello que quieres conseguir?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué acción depende directamente de ti y puedes comenzar sin esperar a que otra persona cambie?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué podría dificultar este primer paso y cómo podrías prepararte para ello?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué necesitas dejar de hacer, reducir o modificar para poder realizar esta acción?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué conducta nueva necesitas empezar a practicar para acercarte a tu objetivo?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué acción sería suficientemente pequeña como para evitar que el objetivo se convierta en una exigencia abrumadora?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Cómo podrías dividir este objetivo en pasos más manejables?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué señal te indicaría que ya es momento de pasar al siguiente paso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué podrías hacer si comienzas y encuentras una dificultad que no habías previsto?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué persona o recurso externo podría ayudarte a llevar a cabo este primer paso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"¿Qué compromiso contigo mismo/a estás dispuesto/a a asumir de manera realista?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"Si tuvieras que elegir una sola acción para comenzar esta semana, ¿cuál sería?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+{
+pregunta:"Después de revisar tus objetivos y prioridades, ¿cuál será concretamente tu próximo paso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Primeros pasos"
+},
+
+
+/* DECISIONES Y PRIORIDADES */
+
+{
+pregunta:"¿Qué decisión consideras que necesitas tomar en este momento?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué aspecto de tu vida necesita mayor prioridad actualmente?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué estás intentando resolver que quizá podría esperar mientras atiendes algo más importante?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué factores consideras más importantes al momento de tomar esta decisión?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué necesitas tener claro antes de poder tomar una decisión?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué decisión depende principalmente de ti y cuál depende de factores externos?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué opción se encuentra más alineada con tus necesidades actuales?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué opción se encuentra más alineada con aquello que consideras importante para tu vida?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué estás priorizando actualmente y qué estás dejando en segundo plano como consecuencia?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué decisión tomarías si no tuvieras que responder a las expectativas de otras personas?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué consecuencias de cada alternativa consideras importantes antes de decidir?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué decisión podría ayudarte a acercarte al objetivo que has identificado?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué necesitas aceptar que no puedes controlar antes de tomar esta decisión?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué límite necesitas establecer para proteger una prioridad que actualmente consideras importante?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué decisión has estado postergando y qué crees que está haciendo difícil abordarla?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué información adicional necesitas para sentir que puedes decidir con mayor claridad?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué diferencia existe entre tomar una decisión desde el miedo y tomarla considerando también tus necesidades y posibilidades?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"¿Qué decisión sería coherente con lo que has aprendido sobre ti durante este proceso?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"Si tuvieras que elegir solo una prioridad para las próximas semanas, ¿cuál sería?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+{
+pregunta:"Después de revisar tus decisiones y prioridades, ¿qué consideras que necesitas decidir, priorizar o dejar en pausa en este momento?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Decisiones y prioridades"
+},
+
+
+/* OBJETIVOS PERSONALES */
+
+{
+pregunta:"¿Qué te gustaría que fuera diferente en tu vida a partir de lo que has comprendido hasta ahora?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué cambio personal consideras más importante para esta etapa de tu vida?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué te gustaría comenzar a construir en lugar de centrarte únicamente en lo que quieres dejar atrás?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué objetivo tendría mayor significado para ti actualmente?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué quieres conseguir para ti, independientemente de lo que otras personas esperen?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué aspecto de tu vida te gustaría mejorar durante los próximos meses?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué objetivo podría acercarte a una vida más coherente con tus necesidades y valores?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué cambio te gustaría notar en tu manera de pensar, sentir, actuar o relacionarte?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué objetivo consideras importante, aunque todavía no sepas exactamente cómo alcanzarlo?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué objetivo sería suficientemente pequeño como para comenzar a trabajarlo desde ahora?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Cómo sabrías que estás avanzando hacia aquello que quieres conseguir?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué resultado concreto te gustaría observar como consecuencia de los cambios que estás realizando?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué objetivo depende principalmente de tus propias decisiones y acciones?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué diferencia existe entre el objetivo que tú quieres alcanzar y aquello que otras personas esperan que consigas?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué objetivo te genera mayor sentido o motivación cuando imaginas haberlo alcanzado?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué necesitarías priorizar para acercarte a ese objetivo?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Qué podría hacer que este objetivo fuera demasiado exigente o poco realista para tu situación actual?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"¿Cómo podrías reformular tu objetivo para que sea más concreto y posible de llevar a la práctica?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"Si durante este proceso solo pudieras conseguir un cambio significativo para ti, ¿cuál elegirías?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+},
+
+{
+pregunta:"Después de revisar tus necesidades, recursos y aprendizajes, ¿cuál sería el objetivo personal que tendría más sentido comenzar a trabajar ahora?",
+modulo:"Módulo 5 · Recursos cambio e integración",
+etapa:"Orientar",
+subtema:"Objetivos personales"
+}
 
 ];
 
 
-const searchInput = document.getElementById("search");
+const search = document.getElementById("search");
 const moduleFilter = document.getElementById("moduleFilter");
 const stageFilter = document.getElementById("stageFilter");
-const topicFilter = document.getElementById("topicFilter");
-const resultsContainer = document.getElementById("results");
-const resultCount = document.getElementById("resultCount");
+const subtopicFilter = document.getElementById("subtopicFilter");
+const results = document.getElementById("results");
+const count = document.getElementById("count");
 
 
-function addOptions(select, values) {
+function normalizar(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
-    values.forEach(value => {
 
-        const option = document.createElement("option");
+function llenarFiltro(elemento, valores) {
 
-        option.value = value;
-        option.textContent = value;
+  valores.forEach(valor => {
 
-        select.appendChild(option);
+    const option = document.createElement("option");
 
-    });
+    option.value = valor;
+    option.textContent = valor;
+
+    elemento.appendChild(option);
+
+  });
 
 }
 
 
-function getUniqueValues(property) {
+function mostrarPreguntas() {
 
-    return [...new Set(
-        questions.map(question => question[property])
-    )].sort();
-
-}
-
-
-addOptions(moduleFilter, getUniqueValues("module"));
-addOptions(stageFilter, getUniqueValues("stage"));
-addOptions(topicFilter, getUniqueValues("topic"));
+  const texto = normalizar(search.value);
+  const modulo = moduleFilter.value;
+  const etapa = stageFilter.value;
+  const subtema = subtopicFilter.value;
 
 
-function renderQuestions() {
+  const filtradas = preguntas.filter(item =>
 
-    const searchText = searchInput.value.toLowerCase();
+    (!texto ||
+      normalizar(item.pregunta).includes(texto)
+    )
 
-    const selectedModule = moduleFilter.value;
-    const selectedStage = stageFilter.value;
-    const selectedTopic = topicFilter.value;
+    &&
 
+    (!modulo ||
+      item.modulo === modulo
+    )
 
-    const filteredQuestions = questions.filter(question => {
+    &&
 
-        const matchesSearch =
-            question.text.toLowerCase().includes(searchText);
+    (!etapa ||
+      item.etapa === etapa
+    )
 
-        const matchesModule =
-            !selectedModule ||
-            question.module === selectedModule;
+    &&
 
-        const matchesStage =
-            !selectedStage ||
-            question.stage === selectedStage;
+    (!subtema ||
+      item.subtema === subtema
+    )
 
-        const matchesTopic =
-            !selectedTopic ||
-            question.topic === selectedTopic;
-
-
-        return (
-            matchesSearch &&
-            matchesModule &&
-            matchesStage &&
-            matchesTopic
-        );
-
-    });
+  );
 
 
-    resultsContainer.innerHTML = "";
+  count.textContent =
+    `Mostrando ${filtradas.length} de ${preguntas.length} preguntas`;
 
 
-    if (filteredQuestions.length === 0) {
+  if (!filtradas.length) {
 
-        resultsContainer.innerHTML = `
-            <div class="empty">
-                No encontramos preguntas con esos criterios.
-            </div>
-        `;
+    results.innerHTML = `
+      <div class="empty">
+        No encontramos preguntas con estos criterios.
+      </div>
+    `;
 
-        resultCount.textContent = "0 resultados";
-
-        return;
-    }
+    return;
+  }
 
 
-    resultCount.textContent =
-        `${filteredQuestions.length} resultado${filteredQuestions.length !== 1 ? "s" : ""}`;
+  results.innerHTML = filtradas.map(item => {
 
+    const numero = preguntas.indexOf(item) + 1;
 
-    filteredQuestions.forEach((question, index) => {
+    return `
+      <article class="card">
 
-        const card = document.createElement("article");
+        <div class="number">
+          PREGUNTA ${numero}
+        </div>
 
-        card.className = "card";
+        <p class="question">
+          ${item.pregunta}
+        </p>
 
-        card.innerHTML = `
+        <div class="tags">
 
-            <div class="question-number">
-                PREGUNTA ${index + 1}
-            </div>
+          <span class="tag">
+            ${item.modulo}
+          </span>
 
-            <div class="question">
-                ${question.text}
-            </div>
+          <span class="tag">
+            ${item.etapa}
+          </span>
 
-            <div class="metadata">
+          <span class="tag">
+            ${item.subtema}
+          </span>
 
-                <span class="tag">
-                    ${question.module}
-                </span>
+        </div>
 
-                <span class="tag">
-                    ${question.stage}
-                </span>
+      </article>
+    `;
 
-                <span class="tag">
-                    ${question.topic}
-                </span>
-
-            </div>
-
-        `;
-
-        resultsContainer.appendChild(card);
-
-    });
+  }).join("");
 
 }
 
 
-searchInput.addEventListener("input", renderQuestions);
-
-moduleFilter.addEventListener("change", renderQuestions);
-
-stageFilter.addEventListener("change", renderQuestions);
-
-topicFilter.addEventListener("change", renderQuestions);
+const modulos = [
+  ...new Set(
+    preguntas.map(p => p.modulo)
+  )
+].sort();
 
 
-renderQuestions();
+const etapas = [
+  ...new Set(
+    preguntas.map(p => p.etapa)
+  )
+].sort();
+
+
+const subtemas = [
+  ...new Set(
+    preguntas.map(p => p.subtema)
+  )
+].sort();
+
+
+llenarFiltro(
+  moduleFilter,
+  modulos
+);
+
+llenarFiltro(
+  stageFilter,
+  etapas
+);
+
+llenarFiltro(
+  subtopicFilter,
+  subtemas
+);
+
+
+search.addEventListener(
+  "input",
+  mostrarPreguntas
+);
+
+moduleFilter.addEventListener(
+  "change",
+  mostrarPreguntas
+);
+
+stageFilter.addEventListener(
+  "change",
+  mostrarPreguntas
+);
+
+subtopicFilter.addEventListener(
+  "change",
+  mostrarPreguntas
+);
+
+
+mostrarPreguntas();
 
 </script>
 
