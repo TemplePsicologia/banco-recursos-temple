@@ -129,40 +129,54 @@
     /* FAVORITOS */
 
     .barra-favoritos {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #E7EEF3;
+}
 
-    .boton-favoritos {
-      border: 1px solid var(--azul-borde);
-      background: white;
-      color: var(--azul-oscuro);
-      padding: 11px 16px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+.favoritos-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 
-    .boton-favoritos:hover {
-      background: var(--celeste);
-    }
+.favoritos-titulo {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--texto);
+}
 
-    .boton-favoritos.activo {
-      background: var(--azul-oscuro);
-      color: white;
-      border-color: var(--azul-oscuro);
-    }
+.contador-favoritos {
+  font-size: 12px;
+  color: var(--texto-suave);
+}
 
-    .contador-favoritos {
-      font-size: 13px;
-      color: var(--texto-suave);
-    }
+.boton-favoritos {
+  border: 1px solid var(--azul-borde);
+  background: white;
+  color: var(--azul-oscuro);
+  padding: 10px 15px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.boton-favoritos:hover {
+  background: var(--celeste);
+}
+
+.boton-favoritos.activo {
+  background: var(--azul-oscuro);
+  color: white;
+  border-color: var(--azul-oscuro);
+}
 
     /* INFORMACIÓN */
 
@@ -533,21 +547,24 @@
 
       </div>
 
-      <div class="barra-favoritos">
+<div class="barra-favoritos">
 
-        <button
-          id="botonFavoritos"
-          class="boton-favoritos"
-          type="button"
-        >
-          ☆ Solo favoritas
-        </button>
+  <div class="favoritos-info">
+    <span class="favoritos-titulo">Mis favoritas</span>
+    <span id="contadorFavoritos" class="contador-favoritos">
+      0 preguntas guardadas
+    </span>
+  </div>
 
-        <span id="contadorFavoritos" class="contador-favoritos">
-          0 favoritas
-        </span>
+  <button
+    id="botonFavoritos"
+    class="boton-favoritos"
+    type="button"
+  >
+    ☆ Ver favoritas
+  </button>
 
-      </div>
+</div>
 
     </section>
 
@@ -1403,29 +1420,37 @@
     }
 
 
-    function actualizarContadorFavoritos() {
-      const cantidad = favoritos.length;
+function actualizarContadorFavoritos() {
 
-      contadorFavoritos.textContent =
-        cantidad === 1
-          ? "1 favorita"
-          : `${cantidad} favoritas`;
+  const cantidad = favoritos.length;
 
-      if (mostrarSoloFavoritas) {
-        botonFavoritos.textContent =
-          cantidad === 1
-            ? "★ Mostrando 1 favorita"
-            : `★ Mostrando ${cantidad} favoritas`;
-      } else {
-        botonFavoritos.textContent = "☆ Solo favoritas";
-      }
+  contadorFavoritos.textContent =
+    cantidad === 0
+      ? "Todavía no has guardado preguntas"
+      : cantidad === 1
+        ? "1 pregunta guardada"
+        : `${cantidad} preguntas guardadas`;
 
-      botonFavoritos.classList.toggle(
-        "activo",
-        mostrarSoloFavoritas
-      );
-    }
+  if (mostrarSoloFavoritas) {
 
+    botonFavoritos.textContent =
+      "← Ver todas";
+
+  } else {
+
+    botonFavoritos.textContent =
+      cantidad > 0
+        ? "★ Ver favoritas"
+        : "☆ Ver favoritas";
+
+  }
+
+  botonFavoritos.classList.toggle(
+    "activo",
+    mostrarSoloFavoritas
+  );
+
+}
 
     /* =====================================================
        FILTROS
