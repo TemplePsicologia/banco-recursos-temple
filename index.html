@@ -88,7 +88,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 15px;
     }
 
     .filters select {
@@ -105,6 +105,36 @@
 
     .filters select:focus {
       border-color: var(--azul-medio);
+    }
+
+    /* FILTRO FAVORITAS */
+
+    .favorites-filter-container {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 25px;
+    }
+
+    .favorites-filter {
+      border: 1px solid var(--azul-borde);
+      border-radius: 10px;
+      padding: 11px 16px;
+      background: white;
+      color: var(--azul-oscuro);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .favorites-filter:hover {
+      background: var(--celeste);
+    }
+
+    .favorites-filter.active {
+      background: var(--azul-oscuro);
+      color: white;
+      border-color: var(--azul-oscuro);
     }
 
     /* CONTADOR */
@@ -126,6 +156,7 @@
     /* TARJETA */
 
     .card {
+      position: relative;
       background: var(--blanco);
       border: 1px solid var(--azul-borde);
       border-radius: 15px;
@@ -142,6 +173,7 @@
       font-weight: bold;
       letter-spacing: 0.5px;
       margin-bottom: 10px;
+      padding-right: 45px;
     }
 
     .question-text {
@@ -150,6 +182,40 @@
       color: var(--texto);
       margin-bottom: 18px;
       flex-grow: 1;
+      padding-right: 5px;
+    }
+
+    /* ESTRELLA FAVORITA */
+
+    .favorite-button {
+      position: absolute;
+      top: 17px;
+      right: 17px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--azul-borde);
+      border-radius: 50%;
+      background: white;
+      color: var(--azul-medio);
+      font-size: 22px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .favorite-button:hover {
+      background: var(--celeste);
+      border-color: var(--azul-medio);
+      transform: scale(1.05);
+    }
+
+    .favorite-button.active {
+      color: #D29B35;
+      border-color: #E3C47A;
+      background: #FFF9E9;
     }
 
     /* ETIQUETAS */
@@ -423,6 +489,11 @@
       .page-info {
         min-width: 80px;
       }
+
+      .favorites-filter-container {
+        margin-bottom: 20px;
+      }
+
     }
 
   </style>
@@ -466,6 +537,21 @@
       <select id="subtemaFilter">
         <option value="">Todos los subtemas</option>
       </select>
+
+    </div>
+
+
+    <!-- FILTRO FAVORITAS -->
+
+    <div class="favorites-filter-container">
+
+      <button
+        id="favoritesFilter"
+        class="favorites-filter"
+        type="button"
+      >
+        ☆ Solo favoritas
+      </button>
 
     </div>
 
@@ -1432,6 +1518,17 @@
 
 
     /* =====================================================
+       FAVORITAS
+       ===================================================== */
+
+    let soloFavoritas = false;
+
+    let favoritas = JSON.parse(
+      localStorage.getItem("favoritasTemple") || "[]"
+    );
+
+
+    /* =====================================================
        ELEMENTOS
        ===================================================== */
 
@@ -1446,6 +1543,9 @@
 
     const subtemaFilter =
       document.getElementById("subtemaFilter");
+
+    const favoritesFilter =
+      document.getElementById("favoritesFilter");
 
     const questionsGrid =
       document.getElementById("questionsGrid");
@@ -1538,6 +1638,48 @@
 
 
     /* =====================================================
+       COMPROBAR SI ES FAVORITA
+       ===================================================== */
+
+    function esFavorita(id) {
+
+      return favoritas.includes(id);
+
+    }
+
+
+    /* =====================================================
+       CAMBIAR FAVORITA
+       ===================================================== */
+
+    function alternarFavorita(id) {
+
+      if (favoritas.includes(id)) {
+
+        favoritas =
+          favoritas.filter(
+            favoritaId => favoritaId !== id
+          );
+
+      } else {
+
+        favoritas.push(id);
+
+      }
+
+
+      localStorage.setItem(
+        "favoritasTemple",
+        JSON.stringify(favoritas)
+      );
+
+
+      mostrarPreguntas();
+
+    }
+
+
+    /* =====================================================
        OBTENER RESULTADOS FILTRADOS
        ===================================================== */
 
@@ -1577,12 +1719,17 @@
           !subtema ||
           p.subtema === subtema;
 
+        const coincideFavorita =
+          !soloFavoritas ||
+          esFavorita(p.id);
+
 
         return (
           coincideTexto &&
           coincideModulo &&
           coincideEtapa &&
-          coincideSubtema
+          coincideSubtema &&
+          coincideFavorita
         );
 
       });
@@ -1655,11 +1802,24 @@
 
       if (totalResultados === 0) {
 
-        questionsGrid.innerHTML = `
-          <div class="no-results">
-            No encontramos preguntas con los criterios seleccionados.
-          </div>
-        `;
+        if (soloFavoritas) {
+
+          questionsGrid.innerHTML = `
+            <div class="no-results">
+              No tienes preguntas favoritas todavía.
+            </div>
+          `;
+
+        } else {
+
+          questionsGrid.innerHTML = `
+            <div class="no-results">
+              No encontramos preguntas con los criterios seleccionados.
+            </div>
+          `;
+
+        }
+
 
         pagination.style.display =
           "none";
@@ -1685,7 +1845,21 @@
         card.className = "card";
 
 
+        const favorita =
+          esFavorita(p.id);
+
+
         card.innerHTML = `
+
+          <button
+            class="favorite-button ${favorita ? "active" : ""}"
+            onclick="alternarFavorita(${p.id})"
+            aria-label="${favorita ? "Quitar de favoritas" : "Añadir a favoritas"}"
+            title="${favorita ? "Quitar de favoritas" : "Añadir a favoritas"}"
+          >
+            ${favorita ? "★" : "☆"}
+          </button>
+
 
           <div class="question-number">
             PREGUNTA ${p.id}
@@ -1741,6 +1915,47 @@
         paginaActual === totalPaginas;
 
     }
+
+
+    /* =====================================================
+       FILTRO SOLO FAVORITAS
+       ===================================================== */
+
+    favoritesFilter.addEventListener(
+      "click",
+      function() {
+
+        soloFavoritas =
+          !soloFavoritas;
+
+        paginaActual = 1;
+
+
+        if (soloFavoritas) {
+
+          favoritesFilter.textContent =
+            "★ Solo favoritas";
+
+          favoritesFilter.classList.add(
+            "active"
+          );
+
+        } else {
+
+          favoritesFilter.textContent =
+            "☆ Solo favoritas";
+
+          favoritesFilter.classList.remove(
+            "active"
+          );
+
+        }
+
+
+        mostrarPreguntas();
+
+      }
+    );
 
 
     /* =====================================================
