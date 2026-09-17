@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Recursos Temple</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #F7F5F1;
+            color: #2F3D35;
+        }
+
+        header {
+            background: #476253;
+            color: white;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #D8D8D8;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .filters select {
+            padding: 13px;
+            border: 1px solid #D8D8D8;
+            border-radius: 10px;
+            background: white;
+            font-size: 15px;
+        }
+
+        .intro {
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #E8EEE9;
+            color: #476253;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #59645E;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 50px;
+            color: #6B746E;
+            font-size: 14px;
+        }
+
+        @media (max-width: 750px) {
+            .filters,
+            .resources {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Banco de Recursos Temple</h1>
+        <p>Recursos interactivos para profesionales de la psicología</p>
+    </header>
+
+    <main class="container">
+
+        <section class="search-box">
+
+            <input
+                type="text"
+                placeholder="🔎 Buscar un recurso..."
+            >
+
+            <div class="filters">
+
+                <select>
+                    <option>Todos los recursos</option>
+                    <option>Preguntas</option>
+                    <option>Actividades</option>
+                    <option>Tareas y aplicaciones</option>
+                </select>
+
+                <select>
+                    <option>Todos los temas</option>
+                    <option>Emociones</option>
+                    <option>Autoestima</option>
+                    <option>Relaciones</option>
+                    <option>Ansiedad</option>
+                </select>
+
+                <select>
+                    <option>Todas las modalidades</option>
+                    <option>Individual</option>
+                    <option>Pareja</option>
+                    <option>Familiar</option>
+                </select>
+
+            </div>
+
+        </section>
+
+        <section class="intro">
+            <h2>Explora tus recursos</h2>
+            <p>Encuentra preguntas, actividades y tareas según lo que necesites trabajar.</p>
+        </section>
+
+        <section class="resources">
+
+            <article class="card">
+                <span class="tag">Pregunta</span>
+                <h3>Ejemplo de pregunta</h3>
+                <p>¿Qué situación reciente te ha hecho darte cuenta de algo importante sobre ti?</p>
+            </article>
+
+            <article class="card">
+                <span class="tag">Actividad</span>
+                <h3>Ejemplo de actividad</h3>
+                <p>Identifica una situación reciente y explora qué pensaste, qué sentiste y cómo respondiste.</p>
+            </article>
+
+            <article class="card">
+                <span class="tag">Tarea</span>
+                <h3>Ejemplo de tarea</h3>
+                <p>Durante la semana, registra una situación que quieras observar con mayor atención.</p>
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer>
+        Temple · Banco Interactivo de Recursos
+    </footer>
+
+</body>
+</html>
