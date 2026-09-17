@@ -2075,10 +2075,10 @@ paginaInfo.textContent =
             renderizarPreguntas();
             renderizarPaginacion();
 
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
+document.getElementById("listaPreguntas").scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 
           }
 
