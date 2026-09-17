@@ -201,6 +201,44 @@
       color: var(--texto-suave);
     }
 
+    /* PAGINACIÓN */
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .pagination button {
+      border: 1px solid var(--azul-borde);
+      border-radius: 9px;
+      padding: 10px 18px;
+      background: white;
+      color: var(--azul-oscuro);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .pagination button:hover:not(:disabled) {
+      background: var(--celeste);
+    }
+
+    .pagination button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .page-info {
+      color: var(--texto-suave);
+      font-size: 14px;
+      min-width: 100px;
+      text-align: center;
+    }
+
     /* MODAL */
 
     .modal {
@@ -373,6 +411,18 @@
       .modal-question {
         font-size: 20px;
       }
+
+      .pagination {
+        gap: 8px;
+      }
+
+      .pagination button {
+        padding: 9px 12px;
+      }
+
+      .page-info {
+        min-width: 80px;
+      }
     }
 
   </style>
@@ -429,6 +479,30 @@
 
     <div class="questions-grid" id="questionsGrid"></div>
 
+
+    <!-- PAGINACIÓN -->
+
+    <div class="pagination" id="pagination">
+
+      <button
+        id="previousButton"
+      >
+        ← Anterior
+      </button>
+
+      <div
+        class="page-info"
+        id="pageInfo"
+      ></div>
+
+      <button
+        id="nextButton"
+      >
+        Siguiente →
+      </button>
+
+    </div>
+
   </main>
 
 
@@ -447,10 +521,16 @@
       </button>
 
 
-      <div class="modal-number" id="modalNumber"></div>
+      <div
+        class="modal-number"
+        id="modalNumber"
+      ></div>
 
 
-      <div class="modal-question" id="modalQuestion"></div>
+      <div
+        class="modal-question"
+        id="modalQuestion"
+      ></div>
 
 
       <!-- BOTÓN COPIAR -->
@@ -1341,6 +1421,17 @@
 
 
     /* =====================================================
+       CONFIGURACIÓN DE PAGINACIÓN
+       ===================================================== */
+
+    const preguntasPorPagina = 20;
+
+    let paginaActual = 1;
+
+    let resultadosActuales = [];
+
+
+    /* =====================================================
        ELEMENTOS
        ===================================================== */
 
@@ -1361,6 +1452,18 @@
 
     const resultsInfo =
       document.getElementById("resultsInfo");
+
+    const pagination =
+      document.getElementById("pagination");
+
+    const previousButton =
+      document.getElementById("previousButton");
+
+    const nextButton =
+      document.getElementById("nextButton");
+
+    const pageInfo =
+      document.getElementById("pageInfo");
 
     const questionModal =
       document.getElementById("questionModal");
@@ -1395,7 +1498,7 @@
 
 
     /* =====================================================
-       CREAR OPCIONES DE FILTROS
+       CREAR FILTROS
        ===================================================== */
 
     function llenarFiltro(select, valores) {
@@ -1435,10 +1538,10 @@
 
 
     /* =====================================================
-       MOSTRAR PREGUNTAS
+       OBTENER RESULTADOS FILTRADOS
        ===================================================== */
 
-    function mostrarPreguntas() {
+    function obtenerResultados() {
 
       const texto =
         searchInput.value
@@ -1455,44 +1558,102 @@
         subtemaFilter.value;
 
 
-      const resultados =
-        preguntas.filter(p => {
+      return preguntas.filter(p => {
 
-          const coincideTexto =
-            p.pregunta
-              .toLowerCase()
-              .includes(texto);
+        const coincideTexto =
+          p.pregunta
+            .toLowerCase()
+            .includes(texto);
 
-          const coincideModulo =
-            !modulo ||
-            p.modulo === modulo;
+        const coincideModulo =
+          !modulo ||
+          p.modulo === modulo;
 
-          const coincideEtapa =
-            !etapa ||
-            p.etapa === etapa;
+        const coincideEtapa =
+          !etapa ||
+          p.etapa === etapa;
 
-          const coincideSubtema =
-            !subtema ||
-            p.subtema === subtema;
+        const coincideSubtema =
+          !subtema ||
+          p.subtema === subtema;
 
-          return (
-            coincideTexto &&
-            coincideModulo &&
-            coincideEtapa &&
-            coincideSubtema
-          );
 
-        });
+        return (
+          coincideTexto &&
+          coincideModulo &&
+          coincideEtapa &&
+          coincideSubtema
+        );
 
+      });
+
+    }
+
+
+    /* =====================================================
+       MOSTRAR PREGUNTAS
+       ===================================================== */
+
+    function mostrarPreguntas() {
+
+      resultadosActuales =
+        obtenerResultados();
+
+
+      const totalResultados =
+        resultadosActuales.length;
+
+
+      const totalPaginas =
+        Math.ceil(
+          totalResultados /
+          preguntasPorPagina
+        );
+
+
+      /* Si la página actual ya no existe */
+
+      if (
+        totalPaginas > 0 &&
+        paginaActual > totalPaginas
+      ) {
+
+        paginaActual =
+          totalPaginas;
+
+      }
+
+
+      /* Resultados de la página actual */
+
+      const inicio =
+        (paginaActual - 1) *
+        preguntasPorPagina;
+
+      const fin =
+        inicio +
+        preguntasPorPagina;
+
+
+      const resultadosPagina =
+        resultadosActuales.slice(
+          inicio,
+          fin
+        );
+
+
+      /* Contador */
 
       resultsInfo.textContent =
-        `${resultados.length} pregunta${resultados.length !== 1 ? "s" : ""} encontrada${resultados.length !== 1 ? "s" : ""}`;
+        `${totalResultados} pregunta${totalResultados !== 1 ? "s" : ""} encontrada${totalResultados !== 1 ? "s" : ""}`;
 
 
       questionsGrid.innerHTML = "";
 
 
-      if (resultados.length === 0) {
+      /* Sin resultados */
+
+      if (totalResultados === 0) {
 
         questionsGrid.innerHTML = `
           <div class="no-results">
@@ -1500,12 +1661,23 @@
           </div>
         `;
 
+        pagination.style.display =
+          "none";
+
         return;
 
       }
 
 
-      resultados.forEach(p => {
+      /* Mostrar paginación */
+
+      pagination.style.display =
+        "flex";
+
+
+      /* Crear tarjetas */
+
+      resultadosPagina.forEach(p => {
 
         const card =
           document.createElement("div");
@@ -1553,7 +1725,82 @@
 
       });
 
+
+      /* Información de página */
+
+      pageInfo.textContent =
+        `Página ${paginaActual} de ${totalPaginas}`;
+
+
+      /* Botones */
+
+      previousButton.disabled =
+        paginaActual === 1;
+
+      nextButton.disabled =
+        paginaActual === totalPaginas;
+
     }
+
+
+    /* =====================================================
+       SIGUIENTE PÁGINA
+       ===================================================== */
+
+    nextButton.addEventListener(
+      "click",
+      function() {
+
+        const totalPaginas =
+          Math.ceil(
+            resultadosActuales.length /
+            preguntasPorPagina
+          );
+
+
+        if (
+          paginaActual <
+          totalPaginas
+        ) {
+
+          paginaActual++;
+
+          mostrarPreguntas();
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       PÁGINA ANTERIOR
+       ===================================================== */
+
+    previousButton.addEventListener(
+      "click",
+      function() {
+
+        if (paginaActual > 1) {
+
+          paginaActual--;
+
+          mostrarPreguntas();
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+        }
+
+      }
+    );
 
 
     /* =====================================================
@@ -1563,7 +1810,10 @@
     function abrirPregunta(id) {
 
       const pregunta =
-        preguntas.find(p => p.id === id);
+        preguntas.find(
+          p => p.id === id
+        );
+
 
       if (!pregunta) return;
 
@@ -1593,10 +1843,14 @@
       copyButton.textContent =
         "📋 Copiar pregunta";
 
-      copyButton.classList.remove("copied");
+      copyButton.classList.remove(
+        "copied"
+      );
 
 
-      questionModal.classList.add("active");
+      questionModal.classList.add(
+        "active"
+      );
 
       document.body.style.overflow =
         "hidden";
@@ -1625,7 +1879,9 @@
           copyButton.textContent =
             "✓ Copiada";
 
-          copyButton.classList.add("copied");
+          copyButton.classList.add(
+            "copied"
+          );
 
 
           setTimeout(() => {
@@ -1633,27 +1889,32 @@
             copyButton.textContent =
               "📋 Copiar pregunta";
 
-            copyButton.classList.remove("copied");
+            copyButton.classList.remove(
+              "copied"
+            );
 
           }, 1800);
 
 
         } catch (error) {
 
-          /* Alternativa para navegadores
-             que no permitan clipboard */
-
           const textarea =
-            document.createElement("textarea");
+            document.createElement(
+              "textarea"
+            );
 
           textarea.value =
             preguntaActual;
 
-          document.body.appendChild(textarea);
+          document.body.appendChild(
+            textarea
+          );
 
           textarea.select();
 
-          document.execCommand("copy");
+          document.execCommand(
+            "copy"
+          );
 
           textarea.remove();
 
@@ -1661,7 +1922,9 @@
           copyButton.textContent =
             "✓ Copiada";
 
-          copyButton.classList.add("copied");
+          copyButton.classList.add(
+            "copied"
+          );
 
 
           setTimeout(() => {
@@ -1669,7 +1932,9 @@
             copyButton.textContent =
               "📋 Copiar pregunta";
 
-            copyButton.classList.remove("copied");
+            copyButton.classList.remove(
+              "copied"
+            );
 
           }, 1800);
 
@@ -1685,9 +1950,12 @@
 
     function cerrarPregunta() {
 
-      questionModal.classList.remove("active");
+      questionModal.classList.remove(
+        "active"
+      );
 
-      document.body.style.overflow = "";
+      document.body.style.overflow =
+        "";
 
     }
 
@@ -1705,7 +1973,8 @@
       function(event) {
 
         if (
-          event.target === questionModal
+          event.target ===
+          questionModal
         ) {
 
           cerrarPregunta();
@@ -1724,7 +1993,9 @@
 
         if (
           event.key === "Escape" &&
-          questionModal.classList.contains("active")
+          questionModal.classList.contains(
+            "active"
+          )
         ) {
 
           cerrarPregunta();
@@ -1736,27 +2007,54 @@
 
 
     /* =====================================================
-       EVENTOS DE BUSCADOR Y FILTROS
+       BUSCADOR Y FILTROS
        ===================================================== */
 
     searchInput.addEventListener(
       "input",
-      mostrarPreguntas
+      function() {
+
+        paginaActual = 1;
+
+        mostrarPreguntas();
+
+      }
     );
+
 
     moduloFilter.addEventListener(
       "change",
-      mostrarPreguntas
+      function() {
+
+        paginaActual = 1;
+
+        mostrarPreguntas();
+
+      }
     );
+
 
     etapaFilter.addEventListener(
       "change",
-      mostrarPreguntas
+      function() {
+
+        paginaActual = 1;
+
+        mostrarPreguntas();
+
+      }
     );
+
 
     subtemaFilter.addEventListener(
       "change",
-      mostrarPreguntas
+      function() {
+
+        paginaActual = 1;
+
+        mostrarPreguntas();
+
+      }
     );
 
 
