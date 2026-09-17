@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banco de Recursos Temple</title>
+
+    <title>Banco de Preguntas Temple</title>
 
     <style>
         * {
@@ -21,18 +22,17 @@
         header {
             background: #476253;
             color: white;
-            padding: 45px 20px;
             text-align: center;
+            padding: 50px 20px;
         }
 
         header h1 {
             font-size: 32px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         header p {
             font-size: 16px;
-            opacity: 0.95;
         }
 
         .container {
@@ -41,20 +41,25 @@
             padding: 0 20px;
         }
 
-        .search-box {
+        .search-panel {
             background: white;
             padding: 25px;
-            border-radius: 14px;
+            border-radius: 16px;
             box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        .search-box input {
+        .search-input {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border: 1px solid #D8D8D8;
             border-radius: 10px;
             font-size: 16px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #476253;
         }
 
         .filters {
@@ -64,73 +69,100 @@
             margin-top: 15px;
         }
 
-        .filters select {
-            padding: 13px;
+        select {
+            width: 100%;
+            padding: 14px;
             border: 1px solid #D8D8D8;
             border-radius: 10px;
             background: white;
             font-size: 15px;
+            color: #2F3D35;
         }
 
-        .intro {
-            margin-bottom: 25px;
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
         }
 
-        .intro h2 {
-            font-size: 24px;
-            margin-bottom: 8px;
+        .results-header h2 {
+            font-size: 23px;
         }
 
-        .resources {
+        #resultCount {
+            color: #6B746E;
+            font-size: 14px;
+        }
+
+        .results {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
         .card {
             background: white;
-            border-radius: 14px;
-            padding: 22px;
+            padding: 24px;
+            border-radius: 16px;
             box-shadow: 0 3px 12px rgba(0,0,0,0.06);
         }
 
+        .question-number {
+            font-size: 13px;
+            color: #476253;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .question {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
         .tag {
-            display: inline-block;
             background: #E8EEE9;
             color: #476253;
             padding: 6px 10px;
             border-radius: 20px;
             font-size: 12px;
-            margin-bottom: 12px;
         }
 
-        .card h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #59645E;
+        .empty {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            text-align: center;
+            color: #6B746E;
         }
 
         footer {
             text-align: center;
-            padding: 35px 20px;
-            margin-top: 50px;
+            padding: 40px 20px;
             color: #6B746E;
             font-size: 14px;
         }
 
         @media (max-width: 750px) {
+
             .filters,
-            .resources {
+            .results {
                 grid-template-columns: 1fr;
             }
 
             header h1 {
-                font-size: 26px;
+                font-size: 27px;
+            }
+
+            .question {
+                font-size: 17px;
             }
         }
     </style>
@@ -138,80 +170,284 @@
 
 <body>
 
-    <header>
-        <h1>Banco de Recursos Temple</h1>
-        <p>Recursos interactivos para profesionales de la psicología</p>
-    </header>
+<header>
+    <h1>Banco de Preguntas Temple</h1>
+    <p>Explora y encuentra preguntas para tu práctica profesional</p>
+</header>
 
-    <main class="container">
+<main class="container">
 
-        <section class="search-box">
+    <section class="search-panel">
 
-            <input
-                type="text"
-                placeholder="🔎 Buscar un recurso..."
-            >
+        <input
+            type="text"
+            id="search"
+            class="search-input"
+            placeholder="🔎 Buscar una pregunta..."
+        >
 
-            <div class="filters">
+        <div class="filters">
 
-                <select>
-                    <option>Todos los recursos</option>
-                    <option>Preguntas</option>
-                    <option>Actividades</option>
-                    <option>Tareas y aplicaciones</option>
-                </select>
+            <select id="moduleFilter">
+                <option value="">Todos los módulos</option>
+            </select>
 
-                <select>
-                    <option>Todos los temas</option>
-                    <option>Emociones</option>
-                    <option>Autoestima</option>
-                    <option>Relaciones</option>
-                    <option>Ansiedad</option>
-                </select>
+            <select id="stageFilter">
+                <option value="">Todas las etapas</option>
+            </select>
 
-                <select>
-                    <option>Todas las modalidades</option>
-                    <option>Individual</option>
-                    <option>Pareja</option>
-                    <option>Familiar</option>
-                </select>
+            <select id="topicFilter">
+                <option value="">Todos los subtemas</option>
+            </select>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <div class="results-header">
+            <h2>Preguntas</h2>
+            <span id="resultCount"></span>
+        </div>
+
+        <div id="results" class="results"></div>
+
+    </section>
+
+</main>
+
+<footer>
+    Temple · Banco Interactivo de Preguntas
+</footer>
+
+
+<script>
+
+const questions = [
+
+    {
+        text: "¿Qué situación reciente te hizo sentir orgulloso/a de ti?",
+        module: "Autoconocimiento",
+        stage: "Exploración",
+        topic: "Recursos personales"
+    },
+
+    {
+        text: "¿Qué suele pasar por tu mente cuando cometes un error?",
+        module: "Autoconocimiento",
+        stage: "Exploración",
+        topic: "Autocrítica"
+    },
+
+    {
+        text: "¿Cómo notas que una emoción está empezando a intensificarse?",
+        module: "Emociones",
+        stage: "Exploración",
+        topic: "Reconocimiento emocional"
+    },
+
+    {
+        text: "¿Qué haces habitualmente cuando sientes preocupación?",
+        module: "Emociones",
+        stage: "Comprensión",
+        topic: "Afrontamiento"
+    },
+
+    {
+        text: "¿Qué necesitas de los demás cuando estás pasando por un momento difícil?",
+        module: "Relaciones",
+        stage: "Exploración",
+        topic: "Necesidades"
+    },
+
+    {
+        text: "¿Qué suele ayudarte a sentirte escuchado/a en una conversación?",
+        module: "Relaciones",
+        stage: "Comprensión",
+        topic: "Comunicación"
+    },
+
+    {
+        text: "¿Qué pensamiento aparece con mayor frecuencia cuando dudas de tus capacidades?",
+        module: "Autoconocimiento",
+        stage: "Comprensión",
+        topic: "Creencias"
+    },
+
+    {
+        text: "¿Qué has aprendido de una situación que inicialmente consideraste difícil?",
+        module: "Autoconocimiento",
+        stage: "Integración",
+        topic: "Aprendizajes"
+    },
+
+    {
+        text: "¿Qué diferencia notas entre lo que necesitas y lo que esperas de los demás?",
+        module: "Relaciones",
+        stage: "Integración",
+        topic: "Necesidades"
+    },
+
+    {
+        text: "¿Qué estrategia te ha ayudado anteriormente a afrontar una situación difícil?",
+        module: "Emociones",
+        stage: "Integración",
+        topic: "Afrontamiento"
+    }
+
+];
+
+
+const searchInput = document.getElementById("search");
+const moduleFilter = document.getElementById("moduleFilter");
+const stageFilter = document.getElementById("stageFilter");
+const topicFilter = document.getElementById("topicFilter");
+const resultsContainer = document.getElementById("results");
+const resultCount = document.getElementById("resultCount");
+
+
+function addOptions(select, values) {
+
+    values.forEach(value => {
+
+        const option = document.createElement("option");
+
+        option.value = value;
+        option.textContent = value;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+function getUniqueValues(property) {
+
+    return [...new Set(
+        questions.map(question => question[property])
+    )].sort();
+
+}
+
+
+addOptions(moduleFilter, getUniqueValues("module"));
+addOptions(stageFilter, getUniqueValues("stage"));
+addOptions(topicFilter, getUniqueValues("topic"));
+
+
+function renderQuestions() {
+
+    const searchText = searchInput.value.toLowerCase();
+
+    const selectedModule = moduleFilter.value;
+    const selectedStage = stageFilter.value;
+    const selectedTopic = topicFilter.value;
+
+
+    const filteredQuestions = questions.filter(question => {
+
+        const matchesSearch =
+            question.text.toLowerCase().includes(searchText);
+
+        const matchesModule =
+            !selectedModule ||
+            question.module === selectedModule;
+
+        const matchesStage =
+            !selectedStage ||
+            question.stage === selectedStage;
+
+        const matchesTopic =
+            !selectedTopic ||
+            question.topic === selectedTopic;
+
+
+        return (
+            matchesSearch &&
+            matchesModule &&
+            matchesStage &&
+            matchesTopic
+        );
+
+    });
+
+
+    resultsContainer.innerHTML = "";
+
+
+    if (filteredQuestions.length === 0) {
+
+        resultsContainer.innerHTML = `
+            <div class="empty">
+                No encontramos preguntas con esos criterios.
+            </div>
+        `;
+
+        resultCount.textContent = "0 resultados";
+
+        return;
+    }
+
+
+    resultCount.textContent =
+        `${filteredQuestions.length} resultado${filteredQuestions.length !== 1 ? "s" : ""}`;
+
+
+    filteredQuestions.forEach((question, index) => {
+
+        const card = document.createElement("article");
+
+        card.className = "card";
+
+        card.innerHTML = `
+
+            <div class="question-number">
+                PREGUNTA ${index + 1}
+            </div>
+
+            <div class="question">
+                ${question.text}
+            </div>
+
+            <div class="metadata">
+
+                <span class="tag">
+                    ${question.module}
+                </span>
+
+                <span class="tag">
+                    ${question.stage}
+                </span>
+
+                <span class="tag">
+                    ${question.topic}
+                </span>
 
             </div>
 
-        </section>
+        `;
 
-        <section class="intro">
-            <h2>Explora tus recursos</h2>
-            <p>Encuentra preguntas, actividades y tareas según lo que necesites trabajar.</p>
-        </section>
+        resultsContainer.appendChild(card);
 
-        <section class="resources">
+    });
 
-            <article class="card">
-                <span class="tag">Pregunta</span>
-                <h3>Ejemplo de pregunta</h3>
-                <p>¿Qué situación reciente te ha hecho darte cuenta de algo importante sobre ti?</p>
-            </article>
+}
 
-            <article class="card">
-                <span class="tag">Actividad</span>
-                <h3>Ejemplo de actividad</h3>
-                <p>Identifica una situación reciente y explora qué pensaste, qué sentiste y cómo respondiste.</p>
-            </article>
 
-            <article class="card">
-                <span class="tag">Tarea</span>
-                <h3>Ejemplo de tarea</h3>
-                <p>Durante la semana, registra una situación que quieras observar con mayor atención.</p>
-            </article>
+searchInput.addEventListener("input", renderQuestions);
 
-        </section>
+moduleFilter.addEventListener("change", renderQuestions);
 
-    </main>
+stageFilter.addEventListener("change", renderQuestions);
 
-    <footer>
-        Temple · Banco Interactivo de Recursos
-    </footer>
+topicFilter.addEventListener("change", renderQuestions);
+
+
+renderQuestions();
+
+</script>
 
 </body>
 </html>
