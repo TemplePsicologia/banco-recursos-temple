@@ -836,194 +836,1431 @@
        DATOS
        ===================================================== */
 
-    const moduloGeneral =
-      "Módulo 5 · Recursos cambio e integración";
-
-    const etapaGeneral =
-      "Orientar";
-
-
     const preguntas = [];
+const preguntasVistas = new Set();
 
+function agregarPregunta(
+  pregunta,
+  modulo,
+  etapa,
+  subtema
+) {
+  const clave = pregunta.trim();
 
-    function agregarPreguntas(
-      inicio,
-      subtema,
-      lista
-    ) {
+  // Omitir únicamente preguntas exactamente iguales
+  if (preguntasVistas.has(clave)) return;
 
-      lista.forEach(
-        (pregunta, indice) => {
+  preguntasVistas.add(clave);
 
-          preguntas.push({
+  preguntas.push({
+    id: preguntas.length + 1,
+    pregunta: pregunta,
+    modulo: modulo,
+    etapa: etapa,
+    subtema: subtema
+  });
+}
 
-            id: inicio + indice,
+   agregarPregunta(
+  "¿Qué consideras que ha sido lo más importante que has descubierto sobre ti durante este proceso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-            pregunta: pregunta,
+agregarPregunta(
+  "¿Qué aprendizaje quieres conservar especialmente a partir de todo lo trabajado?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-            modulo: moduloGeneral,
+agregarPregunta(
+  "¿Qué ha cambiado en tu manera de comprender aquello que estabas viviendo al inicio?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-            etapa: etapaGeneral,
+agregarPregunta(
+  "¿Qué recurso personal reconoces ahora con mayor claridad?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-            subtema: subtema
+agregarPregunta(
+  "¿Qué necesidad has aprendido a identificar con mayor facilidad?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-          });
+agregarPregunta(
+  "¿Qué conducta o forma de responder te gustaría continuar modificando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-        }
-      );
+agregarPregunta(
+  "¿Qué cambio realizado hasta ahora valoras especialmente, aunque todavía esté en proceso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-    }
+agregarPregunta(
+  "¿Qué aspecto de tu experiencia todavía consideras necesario seguir explorando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
+agregarPregunta(
+  "¿Qué has aprendido sobre aquello que puedes controlar y aquello que necesitas aceptar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-    agregarPreguntas(
-      1,
-      "Cierre e integración",
-      [
+agregarPregunta(
+  "¿Qué decisión o prioridad actual refleja mejor lo que has aprendido sobre ti?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-        "¿Qué te gustaría que fuera diferente al terminar este proceso?",
-        "¿Qué cambios reconoces en ti que antes no estaban presentes?",
-        "¿Qué aprendiste sobre ti a lo largo de este proceso?",
-        "¿Qué parte del proceso sientes que fue más significativa para ti?",
-        "¿Qué te gustaría conservar de lo que has construido hasta ahora?",
-        "¿Qué recursos personales reconoces ahora con mayor claridad?",
-        "¿Qué situación actual podrías afrontar de manera diferente gracias a lo trabajado?",
-        "¿Qué idea sobre ti mismo ha cambiado durante este proceso?",
-        "¿Qué señales te indicarían que estás volviendo a tus patrones anteriores?",
-        "¿Qué te gustaría recordar cuando atravieses nuevamente un momento difícil?",
-        "¿Qué decisión relacionada con tu bienestar quieres seguir sosteniendo?",
-        "¿Qué aspecto de este proceso quieres seguir explorando por tu cuenta?",
-        "¿Qué diferencia notas entre cómo enfrentabas antes una dificultad y cómo la enfrentas ahora?",
-        "¿Qué te llevas de este proceso que pueda acompañarte en otras áreas de tu vida?",
-        "¿Qué cambio pequeño representa para ti un avance importante?",
-        "¿Qué parte de ti sientes que ahora comprendes mejor?",
-        "¿Qué has descubierto sobre aquello que necesitas para sentirte mejor?",
-        "¿Qué situación te gustaría observar con mayor conciencia de ahora en adelante?",
-        "¿Qué te gustaría reconocer de ti mismo al mirar hacia atrás?",
-        "Si tuvieras que resumir lo más importante que aprendiste, ¿qué dirías?"
+agregarPregunta(
+  "¿Qué recurso o estrategia quieres seguir utilizando en situaciones futuras?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-      ]
-    );
+agregarPregunta(
+  "¿Qué señales te ayudarán a reconocer cuándo necesitas volver a prestar atención a aquello que has trabajado?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
+agregarPregunta(
+  "¿Qué te gustaría hacer diferente si en el futuro vuelves a encontrarte ante una situación similar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-    agregarPreguntas(
-      21,
-      "Sostenimiento del cambio",
-      [
+agregarPregunta(
+  "¿Qué parte del proceso consideras que todavía necesita tiempo, práctica o acompañamiento?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-        "¿Qué necesitas hacer para mantener este cambio en el tiempo?",
-        "¿Qué hábito podría ayudarte a sostener lo que has logrado?",
-        "¿Qué situaciones podrían dificultar que mantengas este cambio?",
-        "¿Cómo podrías prepararte para momentos en los que te resulte difícil continuar?",
-        "¿Qué apoyo podrías buscar si notas que estás perdiendo lo avanzado?",
-        "¿Qué señales te ayudarían a detectar a tiempo un retroceso?",
-        "¿Qué conducta concreta quieres seguir practicando?",
-        "¿Qué podría hacer más fácil mantener este cambio durante las próximas semanas?",
-        "¿Qué obstáculos necesitas anticipar para cuidar lo que has construido?",
-        "¿Qué recordatorio podrías utilizar cuando aparezca la duda?",
-        "¿Qué persona podría ayudarte a mantener presente este objetivo?",
-        "¿Qué diferencia hay entre mantener un cambio y exigir que todo sea perfecto?",
-        "¿Cómo podrías responder si tienes un día en el que vuelves a una conducta anterior?",
-        "¿Qué te ayudaría a volver a intentarlo después de una dificultad?",
-        "¿Qué parte del cambio depende directamente de ti?",
-        "¿Qué necesitas aceptar para poder sostener este proceso?",
-        "¿Qué comportamiento sería una señal de que estás cuidando tu avance?",
-        "¿Qué puedes hacer cuando notes que estás perdiendo motivación?",
-        "¿Qué necesitas recordar acerca del ritmo de tu propio proceso?",
-        "¿Qué compromiso realista quieres asumir contigo mismo?"
+agregarPregunta(
+  "¿Qué quieres conservar de tu manera actual de afrontar las dificultades?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-      ]
-    );
+agregarPregunta(
+  "¿Qué quieres seguir construyendo a partir de lo que has aprendido?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
+agregarPregunta(
+  "Si pudieras hablar con la versión de ti que estaba comenzando este proceso, ¿qué te gustaría que supiera ahora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-    agregarPreguntas(
-      41,
-      "Primeros pasos",
-      [
+agregarPregunta(
+  "¿Qué decisión concreta puedes tomar para continuar cuidando aquello que has identificado como importante para ti?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-        "¿Cuál sería un primer paso suficientemente pequeño como para poder hacerlo esta semana?",
-        "¿Qué podrías hacer hoy para acercarte un poco a lo que quieres?",
-        "¿Qué estás esperando para dar ese primer paso?",
-        "¿Qué haría que comenzar fuera más sencillo?",
-        "¿Qué parte de este cambio puedes empezar a trabajar sin esperar a sentirte completamente preparado?",
-        "¿Qué acción concreta podrías realizar en las próximas 24 horas?",
-        "¿Qué necesitas organizar antes de comenzar?",
-        "¿Qué pequeño cambio en tu rutina podría facilitar este proceso?",
-        "¿Qué podrías probar en lugar de seguir haciendo lo mismo?",
-        "¿Qué acción te permitiría obtener información antes de tomar una decisión mayor?",
-        "¿Qué sería un avance pequeño pero observable?",
-        "¿Qué puedes hacer aunque todavía tengas dudas?",
-        "¿Qué obstáculo puedes resolver antes de dar el siguiente paso?",
-        "¿Qué necesitas dejar de esperar para comenzar?",
-        "¿Qué paso te parece posible incluso en un día difícil?",
-        "¿Qué recurso ya tienes y podrías utilizar para comenzar?",
-        "¿Qué podrías simplificar para que empezar no se sienta tan pesado?",
-        "¿Qué sería suficientemente bueno para comenzar, aunque no sea perfecto?",
-        "¿Qué acción depende completamente de ti?",
-        "¿Cuál quieres que sea tu siguiente paso concreto?"
+agregarPregunta(
+  "¿Qué te gustaría recordar cuando atravieses nuevamente un momento de dificultad?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
-      ]
-    );
+agregarPregunta(
+  "Después de integrar todo lo trabajado, ¿qué te llevas de este proceso y hacia dónde quieres dirigir tus próximos pasos?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Cierre e integración"
+);
 
+agregarPregunta(
+  "¿Qué necesitarías para mantener el cambio que estás comenzando a realizar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
-    agregarPreguntas(
-      61,
-      "Decisiones y prioridades",
-      [
+agregarPregunta(
+  "¿Qué recursos podrían ayudarte cuando disminuya tu motivación?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
-        "¿Qué decisión estás evitando tomar en este momento?",
-        "¿Qué necesitas tener claro para poder decidir?",
-        "¿Qué opción se acerca más a lo que realmente necesitas?",
-        "¿Qué estás priorizando actualmente y por qué?",
-        "¿Qué estás dejando de lado al elegir esta opción?",
-        "¿Qué criterio quieres utilizar para tomar esta decisión?",
-        "¿Qué diferencia hay entre lo que quieres y lo que sientes que deberías elegir?",
-        "¿Qué consecuencia estás considerando con mayor peso?",
-        "¿Qué información te falta para sentir que puedes decidir con mayor claridad?",
-        "¿Qué decisión sería coherente con la persona que quieres ser?",
-        "¿Qué estás intentando resolver al mismo tiempo y podrías separar?",
-        "¿Qué asunto necesita tu atención primero?",
-        "¿Qué puedes postergar sin que eso perjudique tu bienestar?",
-        "¿Qué prioridad has dejado de lado por atender las necesidades de otras personas?",
-        "¿Qué elección estás haciendo por miedo y cuál harías desde tus necesidades?",
-        "¿Qué sería importante considerar además de lo que estás sintiendo ahora?",
-        "¿Qué opción te permitiría cuidar mejor tus límites?",
-        "¿Qué estás priorizando por costumbre y no necesariamente por necesidad?",
-        "¿Qué decisión podría ayudarte a recuperar espacio para ti?",
-        "Si tuvieras que elegir una sola prioridad para este momento, ¿cuál sería?"
+agregarPregunta(
+  "¿Qué situaciones podrían aumentar el riesgo de volver a tu patrón anterior?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
-      ]
-    );
+agregarPregunta(
+  "¿Qué señales tempranas podrían indicarte que estás regresando a una forma de actuar que ya querías modificar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
+agregarPregunta(
+  "¿Qué podrías hacer cuando reconozcas alguna de esas señales?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
-    agregarPreguntas(
-      81,
-      "Objetivos personales",
-      [
+agregarPregunta(
+  "¿Qué condiciones necesitas mantener para que el cambio continúe siendo sostenible?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
-        "¿Qué objetivo personal te gustaría trabajar primero?",
-        "¿Cómo sabrías que estás avanzando hacia ese objetivo?",
-        "¿Qué significa para ti alcanzar este objetivo?",
-        "¿Este objetivo nace de una necesidad propia o de una expectativa externa?",
-        "¿Qué cambiaría en tu vida si consiguieras este objetivo?",
-        "¿Qué parte del objetivo está bajo tu control?",
-        "¿Qué primer indicador te mostraría que estás avanzando?",
-        "¿Qué necesitas aprender o practicar para acercarte a este objetivo?",
-        "¿Qué obstáculo personal podría aparecer en el camino?",
-        "¿Qué apoyo podrías necesitar para alcanzar este objetivo?",
-        "¿Qué parte de este objetivo puedes convertir en una acción concreta?",
-        "¿Qué expectativas necesitas ajustar para que este objetivo sea realista?",
-        "¿Qué te gustaría conseguir para ti independientemente de lo que hagan otras personas?",
-        "¿Qué estás dispuesto a hacer de manera diferente para acercarte a este objetivo?",
-        "¿Qué tendría que cambiar en tu día a día para que este objetivo tenga espacio?",
-        "¿Qué te podría hacer abandonar este objetivo y cómo podrías anticiparlo?",
-        "¿Qué objetivo sería importante aunque nadie más lo reconociera?",
-        "¿Qué necesitas aceptar sobre tu situación actual antes de plantearte el siguiente paso?",
-        "¿Qué quieres empezar a construir a partir de este momento?",
-        "¿Cuál sería un objetivo personal concreto que puedas comenzar a trabajar desde ahora?"
+agregarPregunta(
+  "¿Qué personas podrían ayudarte a mantener los cambios que consideras importantes?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
-      ]
-    );
+agregarPregunta(
+  "¿Qué hábitos o rutinas podrían facilitar que la nueva conducta se vuelva más estable?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
 
+agregarPregunta(
+  "¿Qué podría hacer que el cambio resulte difícil de mantener a largo plazo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Cómo podrías adaptar tu estrategia cuando cambien tus circunstancias?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué diferencia existe entre mantener un cambio de manera flexible y exigirte hacerlo perfectamente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué podrías aprender de un momento en el que vuelvas temporalmente a una conducta anterior?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué podrías hacer para retomar el proceso después de una dificultad sin considerarla un fracaso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué señales te indicarían que una estrategia ya no está funcionando como antes?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué necesitarías modificar si las condiciones que inicialmente facilitaron el cambio dejan de estar disponibles?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué recurso te gustaría tener presente para los momentos en los que resulte más difícil sostener lo que has construido?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué aspectos del cambio dependen de mantener determinadas decisiones o límites?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Cómo podrías revisar periódicamente si aquello que estás haciendo continúa siendo útil para ti?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Qué te gustaría recordar sobre tu proceso cuando aparezcan momentos de duda o dificultad?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "Después de considerar cómo sostener el cambio, ¿qué necesitas mantener, ajustar o preparar para continuar avanzando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Sostenimiento del cambio"
+);
+
+agregarPregunta(
+  "¿Cuál sería el primer paso concreto que podrías dar para acercarte a tu objetivo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué podrías hacer durante los próximos días que represente un avance hacia aquello que quieres conseguir?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué acción pequeña podrías realizar incluso si todavía no te sientes completamente preparado/a?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué necesitas organizar antes de comenzar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué recurso podrías utilizar para facilitar este primer paso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué momento o situación sería más adecuado para comenzar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué parte del objetivo puedes convertir en una acción concreta?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué podrías hacer hoy que reduzca un poco la distancia entre tu situación actual y aquello que quieres conseguir?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué acción depende directamente de ti y puedes comenzar sin esperar a que otra persona cambie?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué podría dificultar este primer paso y cómo podrías prepararte para ello?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué necesitas dejar de hacer, reducir o modificar para poder realizar esta acción?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué conducta nueva necesitas empezar a practicar para acercarte a tu objetivo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué acción sería suficientemente pequeña como para evitar que el objetivo se convierta en una exigencia abrumadora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Cómo podrías dividir este objetivo en pasos más manejables?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué señal te indicaría que ya es momento de pasar al siguiente paso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué podrías hacer si comienzas y encuentras una dificultad que no habías previsto?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué persona o recurso externo podría ayudarte a llevar a cabo este primer paso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué compromiso contigo mismo/a estás dispuesto/a a asumir de manera realista?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "Si tuvieras que elegir una sola acción para comenzar esta semana, ¿cuál sería?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "Después de revisar tus objetivos y prioridades, ¿cuál será concretamente tu próximo paso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Primeros pasos"
+);
+
+agregarPregunta(
+  "¿Qué decisión consideras que necesitas tomar en este momento?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué aspecto de tu vida necesita mayor prioridad actualmente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué estás intentando resolver que quizá podría esperar mientras atiendes algo más importante?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué factores consideras más importantes al momento de tomar esta decisión?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué necesitas tener claro antes de poder tomar una decisión?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué decisión depende principalmente de ti y cuál depende de factores externos?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué opción se encuentra más alineada con tus necesidades actuales?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué opción se encuentra más alineada con aquello que consideras importante para tu vida?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué estás priorizando actualmente y qué estás dejando en segundo plano como consecuencia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué decisión tomarías si no tuvieras que responder a las expectativas de otras personas?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué consecuencias de cada alternativa consideras importantes antes de decidir?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué decisión podría ayudarte a acercarte al objetivo que has identificado?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué necesitas aceptar que no puedes controlar antes de tomar esta decisión?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué límite necesitas establecer para proteger una prioridad que actualmente consideras importante?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué decisión has estado postergando y qué crees que está haciendo difícil abordarla?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué información adicional necesitas para sentir que puedes decidir con mayor claridad?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué diferencia existe entre tomar una decisión desde el miedo y tomarla considerando también tus necesidades y posibilidades?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué decisión sería coherente con lo que has aprendido sobre ti durante este proceso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "Si tuvieras que elegir solo una prioridad para las próximas semanas, ¿cuál sería?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "Después de revisar tus decisiones y prioridades, ¿qué consideras que necesitas decidir, priorizar o dejar en pausa en este momento?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Decisiones y prioridades"
+);
+
+agregarPregunta(
+  "¿Qué te gustaría que fuera diferente en tu vida a partir de lo que has comprendido hasta ahora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué cambio personal consideras más importante para esta etapa de tu vida?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué te gustaría comenzar a construir en lugar de centrarte únicamente en lo que quieres dejar atrás?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué objetivo tendría mayor significado para ti actualmente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué quieres conseguir para ti, independientemente de lo que otras personas esperen?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué aspecto de tu vida te gustaría mejorar durante los próximos meses?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué objetivo podría acercarte a una vida más coherente con tus necesidades y valores?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué cambio te gustaría notar en tu manera de pensar, sentir, actuar o relacionarte?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué objetivo consideras importante, aunque todavía no sepas exactamente cómo alcanzarlo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué objetivo sería suficientemente pequeño como para comenzar a trabajarlo desde ahora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Cómo sabrías que estás avanzando hacia aquello que quieres conseguir?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué resultado concreto te gustaría observar como consecuencia de los cambios que estás realizando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué objetivo depende principalmente de tus propias decisiones y acciones?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué diferencia existe entre el objetivo que tú quieres alcanzar y aquello que otras personas esperan que consigas?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué objetivo te genera mayor sentido o motivación cuando imaginas haberlo alcanzado?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué necesitarías priorizar para acercarte a ese objetivo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué podría hacer que este objetivo fuera demasiado exigente o poco realista para tu situación actual?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Cómo podrías reformular tu objetivo para que sea más concreto y posible de llevar a la práctica?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "Si durante este proceso solo pudieras conseguir un cambio significativo para ti, ¿cuál elegirías?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "Después de revisar tus necesidades, recursos y aprendizajes, ¿cuál sería el objetivo personal que tendría más sentido comenzar a trabajar ahora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Orientar",
+  "Objetivos personales"
+);
+
+agregarPregunta(
+  "¿Qué aprendizaje de este proceso te gustaría llevar contigo hacia futuras situaciones?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué recurso personal quieres recordar que tienes disponible cuando aparezcan nuevas dificultades?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Cómo te gustaría responder ante una situación similar si volviera a presentarse en el futuro?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué señales podrían ayudarte a reconocer tempranamente que estás entrando nuevamente en un patrón conocido?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué conducta nueva te gustaría continuar fortaleciendo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué aspecto de ti quieres seguir desarrollando durante los próximos meses?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué necesitas recordar sobre tus límites cuando vuelvas a encontrarte ante una situación exigente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué tipo de apoyo te gustaría conservar o fortalecer en tu vida?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué necesidad quieres aprender a reconocer antes de que se convierta en una dificultad mayor?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué decisión futura podría beneficiarse de todo lo que has aprendido sobre ti?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué te gustaría hacer diferente la próxima vez que enfrentes una situación parecida?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué recurso podrías utilizar antes de sentir que la situación se vuelve demasiado difícil?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué aprendizaje te gustaría aplicar también en otras áreas de tu vida?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué cambio realizado durante este proceso quieres convertir en una práctica más estable?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué te gustaría que permaneciera igual en tu manera de ser o de relacionarte contigo mismo/a?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué aspecto consideras que todavía necesita tiempo, práctica o mayor comprensión?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Cómo podrías recordar los recursos y estrategias que te han resultado útiles cuando ya no estés pensando activamente en este proceso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "Si en el futuro atraviesas una dificultad similar, ¿qué te gustaría recordar de la manera en que afrontaste esta experiencia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Qué tipo de persona quieres seguir construyendo a partir de lo que ahora conoces sobre ti?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "Mirando hacia adelante, ¿qué te gustaría conservar, continuar desarrollando y comenzar a hacer de manera diferente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Proyección personal"
+);
+
+agregarPregunta(
+  "¿Cómo se relacionan entre sí los principales aprendizajes que has obtenido de esta experiencia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué has comprendido sobre ti al considerar conjuntamente tus necesidades, recursos y dificultades?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué parte de tu experiencia adquiere un significado diferente cuando la observas como un todo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué relación encuentras entre lo que necesitas, lo que valoras y las decisiones que estás tomando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Cómo han influido tus experiencias anteriores en la persona que eres actualmente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué aspectos de ti mismo/a puedes reconocer con mayor claridad después de todo lo que has explorado?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué capacidades y necesidades pueden coexistir en ti aunque parezcan contradictorias?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué has descubierto que necesitas aceptar sobre ti y qué aspectos consideras que todavía puedes transformar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Cómo ha cambiado la manera en que te relacionas contigo mismo/a?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué parte de tu historia ayuda a comprender mejor la manera en que respondes actualmente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué recursos personales se relacionan directamente con los cambios que quieres realizar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué necesidades actuales podrían requerir que utilices de manera diferente alguno de tus recursos?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué patrones que antes parecían desconectados ahora puedes comprender como parte de una misma experiencia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido sobre tus límites, tus capacidades y tus posibilidades de elección?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué aspectos de tu experiencia quieres conservar como parte importante de quién eres?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué aspectos de tu manera de relacionarte contigo o con los demás te gustaría seguir transformando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Qué nueva comprensión sobre ti mismo/a consideras especialmente importante llevar contigo después de este proceso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Cómo podrías utilizar todo lo que has aprendido cuando aparezcan situaciones similares en el futuro?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Integración personal"
+);
+
+agregarPregunta(
+  "¿Hay algo sobre esta situación que ahora comprendes de una manera diferente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué interpretación que tenías inicialmente ha cambiado o se ha vuelto más compleja?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué otros factores puedes considerar ahora que antes no estabas teniendo en cuenta?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué parte de tu experiencia puede observarse desde una perspectiva diferente a la habitual?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué explicación alternativa podría existir para aquello que ocurrió?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué diferencia encuentras entre lo que ocurrió y la interpretación que construiste sobre lo ocurrido?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué información nueva ha cambiado la manera en que entiendes esta situación?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Cómo podría verse esta experiencia si la observaras con mayor distancia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué aspectos de la situación ahora puedes reconocer que antes pasaban desapercibidos?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué perspectiva podría tener otra persona involucrada que sea diferente de la tuya?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué cambiaría en tu comprensión si pudieras considerar simultáneamente dos interpretaciones diferentes?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué parte de tu primera explicación sobre esta situación todavía consideras válida y qué parte cuestionas actualmente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Hay alguna conclusión sobre ti mismo/a que hoy mirarías con mayor cautela?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué posibilidad aparece cuando dejas de pensar que solo existe una manera de responder ante esta situación?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Cómo cambia tu experiencia cuando distingues aquello que puedes saber de aquello que estás interpretando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué significado diferente podría tener esta experiencia desde el momento de vida en el que te encuentras actualmente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué aspecto de esta situación te gustaría poder observar con mayor flexibilidad?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué nueva perspectiva te permite comprenderte con mayor claridad sin negar las dificultades que has vivido?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué interpretación te resulta actualmente más útil para comprender lo que estás atravesando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Nuevas perspectivas"
+);
+
+agregarPregunta(
+  "¿Qué notas que ha cambiado en ti desde que comenzaste a prestar atención a esta situación?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué haces actualmente de una manera diferente a como lo hacías antes?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué cambio pequeño has notado que quizá inicialmente no habías considerado importante?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿En qué situaciones notas con mayor claridad que estás respondiendo de una manera diferente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué conducta has logrado modificar, aunque todavía no sea de la manera que deseas?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué situación que antes resultaba especialmente difícil ahora puedes afrontar de otra manera?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué diferencia notas en la manera en que reaccionas ante aquello que anteriormente activaba el patrón?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué cambios has observado en la manera en que reconoces tus necesidades?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué cambios has notado en la forma en que utilizas tus recursos o buscas apoyo?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué haces ahora que antes te resultaba difícil hacer?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué situación reciente te permitió darte cuenta de que algo había cambiado?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué avances quizá no sean visibles para otras personas, pero tú reconoces claramente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué ha cambiado en tu manera de interpretar una situación que antes veías de otra forma?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué conducta o respuesta nueva ha comenzado a aparecer con mayor frecuencia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué aspecto de tu proceso ha avanzado más de lo que esperabas?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué aspecto todavía se mantiene igual y necesita mayor atención?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué diferencia existe entre cómo afrontabas esta dificultad antes y cómo la afrontas actualmente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué evidencia concreta te permite reconocer que se ha producido algún cambio?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué cambio te gustaría seguir fortaleciendo durante la siguiente etapa?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "Después de revisar tus cambios y avances, ¿cuál consideras que ha sido el más significativo para ti hasta ahora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Cambios y avances"
+);
+
+agregarPregunta(
+  "¿Qué has descubierto sobre ti a partir de todo lo que has explorado hasta ahora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué comprensión tienes actualmente que no tenías al comenzar este proceso?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido sobre la manera en que afrontas las dificultades?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido sobre tus necesidades a partir de esta experiencia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has descubierto sobre los recursos con los que cuentas?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué patrón personal puedes reconocer ahora con mayor claridad?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido sobre aquello que te ayuda y aquello que suele dificultarte las cosas?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué experiencia reciente te ha enseñado algo importante sobre ti?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido sobre la manera en que tus pensamientos, emociones y conductas se relacionan?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has descubierto sobre tus límites y sobre aquello que sí puedes manejar?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué aprendizaje te gustaría conservar incluso cuando esta situación deje de ser una dificultad presente?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido sobre pedir ayuda, recibir apoyo o permitir que otras personas te acompañen?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido sobre las decisiones que tomas cuando atraviesas momentos de incertidumbre?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué idea sobre ti mismo/a ha cambiado a partir de lo que has comprendido?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué aprendizaje te hubiera resultado útil tener antes de atravesar esta experiencia?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué has aprendido de los momentos en los que las cosas no salieron como esperabas?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué aprendizaje consideras que podrías aplicar en otra situación similar en el futuro?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué parte de lo aprendido todavía necesitas comprender o poner en práctica?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "Si tuvieras que resumir en una sola idea lo más importante que has aprendido sobre ti, ¿cuál sería?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "Después de revisar tus aprendizajes, ¿cuál consideras que tiene mayor valor para la etapa que estás atravesando ahora?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Reflexionar",
+  "Aprendizajes del proceso"
+);
+
+agregarPregunta(
+  "¿Qué significaría para ti lograr el cambio que estás considerando?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Profundizar",
+  "Sentido personal del cambio"
+);
+
+agregarPregunta(
+  "¿Por qué este cambio es importante para ti en este momento de tu vida?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Profundizar",
+  "Sentido personal del cambio"
+);
+
+agregarPregunta(
+  "¿Qué aspecto de tu vida esperas que pueda ser diferente si realizas este cambio?",
+  "Módulo 5 · Recursos cambio e integración",
+  "Profundizar",
+  "Sentido personal del cambio"
+);
+  
 
     /* =====================================================
        ESTADO
