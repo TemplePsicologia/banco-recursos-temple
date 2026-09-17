@@ -7,6 +7,7 @@
   <title>Banco de Preguntas Temple</title>
 
   <style>
+
     :root {
       --azul-oscuro: #2F5573;
       --azul: #4C78A0;
@@ -18,7 +19,6 @@
       --texto-suave: #607789;
       --blanco: #FFFFFF;
       --gris: #F5F7F9;
-      --rojo-suave: #FFF3F3;
       --sombra: 0 8px 25px rgba(47, 85, 115, 0.10);
     }
 
@@ -129,54 +129,122 @@
     /* FAVORITOS */
 
     .barra-favoritos {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #E7EEF3;
-}
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #E7EEF3;
+    }
 
-.favoritos-info {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
+    .favoritos-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
 
-.favoritos-titulo {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--texto);
-}
+    .favoritos-titulo {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--texto);
+    }
 
-.contador-favoritos {
-  font-size: 12px;
-  color: var(--texto-suave);
-}
+    .contador-favoritos {
+      font-size: 12px;
+      color: var(--texto-suave);
+    }
 
-.boton-favoritos {
-  border: 1px solid var(--azul-borde);
-  background: white;
-  color: var(--azul-oscuro);
-  padding: 10px 15px;
-  border-radius: 9px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
+    .boton-favoritos {
+      border: 1px solid var(--azul-borde);
+      background: white;
+      color: var(--azul-oscuro);
+      padding: 10px 15px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-.boton-favoritos:hover {
-  background: var(--celeste);
-}
+    .boton-favoritos:hover {
+      background: var(--celeste);
+    }
 
-.boton-favoritos.activo {
-  background: var(--azul-oscuro);
-  color: white;
-  border-color: var(--azul-oscuro);
-}
+    .boton-favoritos.activo {
+      background: var(--azul-oscuro);
+      color: white;
+      border-color: var(--azul-oscuro);
+    }
+
+    /* SELECCIÓN MÚLTIPLE */
+
+    .barra-seleccion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      padding: 14px 15px;
+      background: var(--celeste-claro);
+      border: 1px solid var(--azul-borde);
+      border-radius: 11px;
+    }
+
+    .seleccion-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .seleccion-titulo {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--texto);
+    }
+
+    .contador-seleccion {
+      font-size: 12px;
+      color: var(--texto-suave);
+    }
+
+    .seleccion-acciones {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .boton-seleccion {
+      border: 1px solid var(--azul-borde);
+      background: white;
+      color: var(--azul-oscuro);
+      padding: 9px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .boton-seleccion:hover:not(:disabled) {
+      border-color: var(--azul);
+    }
+
+    .boton-seleccion.principal {
+      background: var(--azul-oscuro);
+      color: white;
+      border-color: var(--azul-oscuro);
+    }
+
+    .boton-seleccion.principal:hover:not(:disabled) {
+      background: var(--azul);
+    }
+
+    .boton-seleccion:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
 
     /* INFORMACIÓN */
 
@@ -211,6 +279,32 @@
     .tarjeta:hover {
       transform: translateY(-2px);
       box-shadow: var(--sombra);
+    }
+
+    .tarjeta.seleccionada {
+      border-color: var(--azul-medio);
+      box-shadow: 0 0 0 2px rgba(111, 163, 200, 0.12);
+    }
+
+    .seleccion-pregunta {
+      margin-bottom: 12px;
+    }
+
+    .checkbox-pregunta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--texto-suave);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-pregunta input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--azul-oscuro);
+      cursor: pointer;
     }
 
     .numero-pregunta {
@@ -318,7 +412,7 @@
     .pagina-info {
       font-size: 13px;
       color: var(--texto-suave);
-      min-width: 100px;
+      min-width: 150px;
       text-align: center;
     }
 
@@ -469,6 +563,7 @@
     /* RESPONSIVE */
 
     @media (max-width: 800px) {
+
       .grid-preguntas {
         grid-template-columns: 1fr;
       }
@@ -480,9 +575,11 @@
       h1 {
         font-size: 28px;
       }
+
     }
 
     @media (max-width: 500px) {
+
       header {
         padding: 32px 18px;
       }
@@ -503,21 +600,46 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .barra-seleccion {
+        align-items: flex-start;
+      }
+
+      .seleccion-acciones {
+        width: 100%;
+      }
+
+      .boton-seleccion {
+        flex: 1;
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
   <header>
+
     <div class="header-inner">
-      <div class="marca">TEMPLE · RECURSOS PARA TU PRÁCTICA</div>
-      <h1>Banco de Preguntas Temple</h1>
+
+      <div class="marca">
+        TEMPLE · RECURSOS PARA TU PRÁCTICA
+      </div>
+
+      <h1>
+        Banco de Preguntas Temple
+      </h1>
+
       <p class="subtitulo">
         Explora y encuentra preguntas para tu práctica profesional.
       </p>
+
     </div>
+
   </header>
+
 
   <main class="contenedor">
 
@@ -547,37 +669,106 @@
 
       </div>
 
-<div class="barra-favoritos">
 
-  <div class="favoritos-info">
-    <span class="favoritos-titulo">Mis favoritas</span>
-    <span id="contadorFavoritos" class="contador-favoritos">
-      0 preguntas guardadas
-    </span>
-  </div>
+      <div class="barra-favoritos">
 
-  <button
-    id="botonFavoritos"
-    class="boton-favoritos"
-    type="button"
-  >
-    ☆ Ver favoritas
-  </button>
+        <div class="favoritos-info">
 
-</div>
+          <span class="favoritos-titulo">
+            Mis favoritas
+          </span>
+
+          <span
+            id="contadorFavoritos"
+            class="contador-favoritos"
+          >
+            0 preguntas guardadas
+          </span>
+
+        </div>
+
+        <button
+          id="botonFavoritos"
+          class="boton-favoritos"
+          type="button"
+        >
+          ☆ Ver favoritas
+        </button>
+
+      </div>
+
+
+      <div
+        id="barraSeleccion"
+        class="barra-seleccion"
+      >
+
+        <div class="seleccion-info">
+
+          <span class="seleccion-titulo">
+            Preguntas seleccionadas
+          </span>
+
+          <span
+            id="contadorSeleccion"
+            class="contador-seleccion"
+          >
+            0 preguntas seleccionadas
+          </span>
+
+        </div>
+
+        <div class="seleccion-acciones">
+
+          <button
+            id="copiarSeleccionadas"
+            class="boton-seleccion principal"
+            type="button"
+            disabled
+          >
+            📋 Copiar seleccionadas
+          </button>
+
+          <button
+            id="limpiarSeleccion"
+            class="boton-seleccion"
+            type="button"
+            disabled
+          >
+            Limpiar
+          </button>
+
+        </div>
+
+      </div>
 
     </section>
 
+
     <div class="info-resultados">
-      <span id="contadorResultados">0 preguntas</span>
+
+      <span id="contadorResultados">
+        0 preguntas
+      </span>
+
       <span id="textoPagina"></span>
+
     </div>
 
-    <section id="listaPreguntas" class="grid-preguntas"></section>
 
-    <div id="paginacion" class="paginacion"></div>
+    <section
+      id="listaPreguntas"
+      class="grid-preguntas"
+    ></section>
+
+
+    <div
+      id="paginacion"
+      class="paginacion"
+    ></div>
 
   </main>
+
 
   <footer>
     Banco de Preguntas Temple · Recursos para la práctica profesional
@@ -599,11 +790,20 @@
         ×
       </button>
 
-      <div id="modalNumero" class="modal-numero"></div>
+      <div
+        id="modalNumero"
+        class="modal-numero"
+      ></div>
 
-      <h2 id="modalPregunta" class="modal-pregunta"></h2>
+      <h2
+        id="modalPregunta"
+        class="modal-pregunta"
+      ></h2>
 
-      <div id="modalDatos" class="modal-datos"></div>
+      <div
+        id="modalDatos"
+        class="modal-datos"
+      ></div>
 
       <div class="modal-acciones">
 
@@ -636,714 +836,193 @@
        DATOS
        ===================================================== */
 
-    const preguntas = [
+    const moduloGeneral =
+      "Módulo 5 · Recursos cambio e integración";
 
-      {
-        id: 1,
-        pregunta: "¿Qué te gustaría que fuera diferente al terminar este proceso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 2,
-        pregunta: "¿Qué cambios reconoces en ti que antes no estaban presentes?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 3,
-        pregunta: "¿Qué aprendiste sobre ti a lo largo de este proceso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 4,
-        pregunta: "¿Qué parte del proceso sientes que fue más significativa para ti?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 5,
-        pregunta: "¿Qué te gustaría conservar de lo que has construido hasta ahora?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 6,
-        pregunta: "¿Qué recursos personales reconoces ahora con mayor claridad?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 7,
-        pregunta: "¿Qué situación actual podrías afrontar de manera diferente gracias a lo trabajado?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 8,
-        pregunta: "¿Qué idea sobre ti mismo ha cambiado durante este proceso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 9,
-        pregunta: "¿Qué señales te indicarían que estás volviendo a tus patrones anteriores?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 10,
-        pregunta: "¿Qué te gustaría recordar cuando atravieses nuevamente un momento difícil?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 11,
-        pregunta: "¿Qué decisión relacionada con tu bienestar quieres seguir sosteniendo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 12,
-        pregunta: "¿Qué aspecto de este proceso quieres seguir explorando por tu cuenta?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 13,
-        pregunta: "¿Qué diferencia notas entre cómo enfrentabas antes una dificultad y cómo la enfrentas ahora?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 14,
-        pregunta: "¿Qué te llevas de este proceso que pueda acompañarte en otras áreas de tu vida?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 15,
-        pregunta: "¿Qué cambio pequeño representa para ti un avance importante?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 16,
-        pregunta: "¿Qué parte de ti sientes que ahora comprendes mejor?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 17,
-        pregunta: "¿Qué has descubierto sobre aquello que necesitas para sentirte mejor?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 18,
-        pregunta: "¿Qué situación te gustaría observar con mayor conciencia de ahora en adelante?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 19,
-        pregunta: "¿Qué te gustaría reconocer de ti mismo al mirar hacia atrás?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
-      {
-        id: 20,
-        pregunta: "Si tuvieras que resumir lo más importante que aprendiste, ¿qué dirías?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Cierre e integración"
-      },
+    const etapaGeneral =
+      "Orientar";
 
-      {
-        id: 21,
-        pregunta: "¿Qué necesitas hacer para mantener este cambio en el tiempo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 22,
-        pregunta: "¿Qué hábito podría ayudarte a sostener lo que has logrado?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 23,
-        pregunta: "¿Qué situaciones podrían dificultar que mantengas este cambio?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 24,
-        pregunta: "¿Cómo podrías prepararte para momentos en los que te resulte difícil continuar?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 25,
-        pregunta: "¿Qué apoyo podrías buscar si notas que estás perdiendo lo avanzado?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 26,
-        pregunta: "¿Qué señales te ayudarían a detectar a tiempo un retroceso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 27,
-        pregunta: "¿Qué conducta concreta quieres seguir practicando?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 28,
-        pregunta: "¿Qué podría hacer más fácil mantener este cambio durante las próximas semanas?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 29,
-        pregunta: "¿Qué obstáculos necesitas anticipar para cuidar lo que has construido?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 30,
-        pregunta: "¿Qué recordatorio podrías utilizar cuando aparezca la duda?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 31,
-        pregunta: "¿Qué persona podría ayudarte a mantener presente este objetivo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 32,
-        pregunta: "¿Qué diferencia hay entre mantener un cambio y exigir que todo sea perfecto?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 33,
-        pregunta: "¿Cómo podrías responder si tienes un día en el que vuelves a una conducta anterior?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 34,
-        pregunta: "¿Qué te ayudaría a volver a intentarlo después de una dificultad?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 35,
-        pregunta: "¿Qué parte del cambio depende directamente de ti?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 36,
-        pregunta: "¿Qué necesitas aceptar para poder sostener este proceso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 37,
-        pregunta: "¿Qué comportamiento sería una señal de que estás cuidando tu avance?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 38,
-        pregunta: "¿Qué puedes hacer cuando notes que estás perdiendo motivación?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 39,
-        pregunta: "¿Qué necesitas recordar acerca del ritmo de tu propio proceso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
-      {
-        id: 40,
-        pregunta: "¿Qué compromiso realista quieres asumir contigo mismo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Sostenimiento del cambio"
-      },
 
-      {
-        id: 41,
-        pregunta: "¿Cuál sería un primer paso suficientemente pequeño como para poder hacerlo esta semana?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 42,
-        pregunta: "¿Qué podrías hacer hoy para acercarte un poco a lo que quieres?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 43,
-        pregunta: "¿Qué estás esperando para dar ese primer paso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 44,
-        pregunta: "¿Qué haría que comenzar fuera más sencillo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 45,
-        pregunta: "¿Qué parte de este cambio puedes empezar a trabajar sin esperar a sentirte completamente preparado?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 46,
-        pregunta: "¿Qué acción concreta podrías realizar en las próximas 24 horas?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 47,
-        pregunta: "¿Qué necesitas organizar antes de comenzar?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 48,
-        pregunta: "¿Qué pequeño cambio en tu rutina podría facilitar este proceso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 49,
-        pregunta: "¿Qué podrías probar en lugar de seguir haciendo lo mismo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 50,
-        pregunta: "¿Qué acción te permitiría obtener información antes de tomar una decisión mayor?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 51,
-        pregunta: "¿Qué sería un avance pequeño pero observable?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 52,
-        pregunta: "¿Qué puedes hacer aunque todavía tengas dudas?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 53,
-        pregunta: "¿Qué obstáculo puedes resolver antes de dar el siguiente paso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 54,
-        pregunta: "¿Qué necesitas dejar de esperar para comenzar?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 55,
-        pregunta: "¿Qué paso te parece posible incluso en un día difícil?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 56,
-        pregunta: "¿Qué recurso ya tienes y podrías utilizar para comenzar?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 57,
-        pregunta: "¿Qué podrías simplificar para que empezar no se sienta tan pesado?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 58,
-        pregunta: "¿Qué sería suficientemente bueno para comenzar, aunque no sea perfecto?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 59,
-        pregunta: "¿Qué acción depende completamente de ti?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
-      {
-        id: 60,
-        pregunta: "¿Cuál quieres que sea tu siguiente paso concreto?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Primeros pasos"
-      },
+    const preguntas = [];
 
-      {
-        id: 61,
-        pregunta: "¿Qué decisión estás evitando tomar en este momento?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 62,
-        pregunta: "¿Qué necesitas tener claro para poder decidir?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 63,
-        pregunta: "¿Qué opción se acerca más a lo que realmente necesitas?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 64,
-        pregunta: "¿Qué estás priorizando actualmente y por qué?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 65,
-        pregunta: "¿Qué estás dejando de lado al elegir esta opción?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 66,
-        pregunta: "¿Qué criterio quieres utilizar para tomar esta decisión?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 67,
-        pregunta: "¿Qué diferencia hay entre lo que quieres y lo que sientes que deberías elegir?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 68,
-        pregunta: "¿Qué consecuencia estás considerando con mayor peso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 69,
-        pregunta: "¿Qué información te falta para sentir que puedes decidir con mayor claridad?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 70,
-        pregunta: "¿Qué decisión sería coherente con la persona que quieres ser?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 71,
-        pregunta: "¿Qué estás intentando resolver al mismo tiempo y podrías separar?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 72,
-        pregunta: "¿Qué asunto necesita tu atención primero?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 73,
-        pregunta: "¿Qué puedes postergar sin que eso perjudique tu bienestar?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 74,
-        pregunta: "¿Qué prioridad has dejado de lado por atender las necesidades de otras personas?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 75,
-        pregunta: "¿Qué elección estás haciendo por miedo y cuál harías desde tus necesidades?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 76,
-        pregunta: "¿Qué sería importante considerar además de lo que estás sintiendo ahora?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 77,
-        pregunta: "¿Qué opción te permitiría cuidar mejor tus límites?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 78,
-        pregunta: "¿Qué estás priorizando por costumbre y no necesariamente por necesidad?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 79,
-        pregunta: "¿Qué decisión podría ayudarte a recuperar espacio para ti?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
-      {
-        id: 80,
-        pregunta: "Si tuvieras que elegir una sola prioridad para este momento, ¿cuál sería?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Decisiones y prioridades"
-      },
 
-      {
-        id: 81,
-        pregunta: "¿Qué objetivo personal te gustaría trabajar primero?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 82,
-        pregunta: "¿Cómo sabrías que estás avanzando hacia ese objetivo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 83,
-        pregunta: "¿Qué significa para ti alcanzar este objetivo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 84,
-        pregunta: "¿Este objetivo nace de una necesidad propia o de una expectativa externa?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 85,
-        pregunta: "¿Qué cambiaría en tu vida si consiguieras este objetivo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 86,
-        pregunta: "¿Qué parte del objetivo está bajo tu control?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 87,
-        pregunta: "¿Qué primer indicador te mostraría que estás avanzando?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 88,
-        pregunta: "¿Qué necesitas aprender o practicar para acercarte a este objetivo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 89,
-        pregunta: "¿Qué obstáculo personal podría aparecer en el camino?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 90,
-        pregunta: "¿Qué apoyo podrías necesitar para alcanzar este objetivo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 91,
-        pregunta: "¿Qué parte de este objetivo puedes convertir en una acción concreta?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 92,
-        pregunta: "¿Qué expectativas necesitas ajustar para que este objetivo sea realista?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 93,
-        pregunta: "¿Qué te gustaría conseguir para ti independientemente de lo que hagan otras personas?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 94,
-        pregunta: "¿Qué estás dispuesto a hacer de manera diferente para acercarte a este objetivo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 95,
-        pregunta: "¿Qué tendría que cambiar en tu día a día para que este objetivo tenga espacio?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 96,
-        pregunta: "¿Qué te podría hacer abandonar este objetivo y cómo podrías anticiparlo?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 97,
-        pregunta: "¿Qué objetivo sería importante aunque nadie más lo reconociera?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 98,
-        pregunta: "¿Qué necesitas aceptar sobre tu situación actual antes de plantearte el siguiente paso?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 99,
-        pregunta: "¿Qué quieres empezar a construir a partir de este momento?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      },
-      {
-        id: 100,
-        pregunta: "¿Cuál sería un objetivo personal concreto que puedas comenzar a trabajar desde ahora?",
-        modulo: "Módulo 5 · Recursos cambio e integración",
-        etapa: "Orientar",
-        subtema: "Objetivos personales"
-      }
+    function agregarPreguntas(
+      inicio,
+      subtema,
+      lista
+    ) {
 
-    ];
+      lista.forEach(
+        (pregunta, indice) => {
+
+          preguntas.push({
+
+            id: inicio + indice,
+
+            pregunta: pregunta,
+
+            modulo: moduloGeneral,
+
+            etapa: etapaGeneral,
+
+            subtema: subtema
+
+          });
+
+        }
+      );
+
+    }
+
+
+    agregarPreguntas(
+      1,
+      "Cierre e integración",
+      [
+
+        "¿Qué te gustaría que fuera diferente al terminar este proceso?",
+        "¿Qué cambios reconoces en ti que antes no estaban presentes?",
+        "¿Qué aprendiste sobre ti a lo largo de este proceso?",
+        "¿Qué parte del proceso sientes que fue más significativa para ti?",
+        "¿Qué te gustaría conservar de lo que has construido hasta ahora?",
+        "¿Qué recursos personales reconoces ahora con mayor claridad?",
+        "¿Qué situación actual podrías afrontar de manera diferente gracias a lo trabajado?",
+        "¿Qué idea sobre ti mismo ha cambiado durante este proceso?",
+        "¿Qué señales te indicarían que estás volviendo a tus patrones anteriores?",
+        "¿Qué te gustaría recordar cuando atravieses nuevamente un momento difícil?",
+        "¿Qué decisión relacionada con tu bienestar quieres seguir sosteniendo?",
+        "¿Qué aspecto de este proceso quieres seguir explorando por tu cuenta?",
+        "¿Qué diferencia notas entre cómo enfrentabas antes una dificultad y cómo la enfrentas ahora?",
+        "¿Qué te llevas de este proceso que pueda acompañarte en otras áreas de tu vida?",
+        "¿Qué cambio pequeño representa para ti un avance importante?",
+        "¿Qué parte de ti sientes que ahora comprendes mejor?",
+        "¿Qué has descubierto sobre aquello que necesitas para sentirte mejor?",
+        "¿Qué situación te gustaría observar con mayor conciencia de ahora en adelante?",
+        "¿Qué te gustaría reconocer de ti mismo al mirar hacia atrás?",
+        "Si tuvieras que resumir lo más importante que aprendiste, ¿qué dirías?"
+
+      ]
+    );
+
+
+    agregarPreguntas(
+      21,
+      "Sostenimiento del cambio",
+      [
+
+        "¿Qué necesitas hacer para mantener este cambio en el tiempo?",
+        "¿Qué hábito podría ayudarte a sostener lo que has logrado?",
+        "¿Qué situaciones podrían dificultar que mantengas este cambio?",
+        "¿Cómo podrías prepararte para momentos en los que te resulte difícil continuar?",
+        "¿Qué apoyo podrías buscar si notas que estás perdiendo lo avanzado?",
+        "¿Qué señales te ayudarían a detectar a tiempo un retroceso?",
+        "¿Qué conducta concreta quieres seguir practicando?",
+        "¿Qué podría hacer más fácil mantener este cambio durante las próximas semanas?",
+        "¿Qué obstáculos necesitas anticipar para cuidar lo que has construido?",
+        "¿Qué recordatorio podrías utilizar cuando aparezca la duda?",
+        "¿Qué persona podría ayudarte a mantener presente este objetivo?",
+        "¿Qué diferencia hay entre mantener un cambio y exigir que todo sea perfecto?",
+        "¿Cómo podrías responder si tienes un día en el que vuelves a una conducta anterior?",
+        "¿Qué te ayudaría a volver a intentarlo después de una dificultad?",
+        "¿Qué parte del cambio depende directamente de ti?",
+        "¿Qué necesitas aceptar para poder sostener este proceso?",
+        "¿Qué comportamiento sería una señal de que estás cuidando tu avance?",
+        "¿Qué puedes hacer cuando notes que estás perdiendo motivación?",
+        "¿Qué necesitas recordar acerca del ritmo de tu propio proceso?",
+        "¿Qué compromiso realista quieres asumir contigo mismo?"
+
+      ]
+    );
+
+
+    agregarPreguntas(
+      41,
+      "Primeros pasos",
+      [
+
+        "¿Cuál sería un primer paso suficientemente pequeño como para poder hacerlo esta semana?",
+        "¿Qué podrías hacer hoy para acercarte un poco a lo que quieres?",
+        "¿Qué estás esperando para dar ese primer paso?",
+        "¿Qué haría que comenzar fuera más sencillo?",
+        "¿Qué parte de este cambio puedes empezar a trabajar sin esperar a sentirte completamente preparado?",
+        "¿Qué acción concreta podrías realizar en las próximas 24 horas?",
+        "¿Qué necesitas organizar antes de comenzar?",
+        "¿Qué pequeño cambio en tu rutina podría facilitar este proceso?",
+        "¿Qué podrías probar en lugar de seguir haciendo lo mismo?",
+        "¿Qué acción te permitiría obtener información antes de tomar una decisión mayor?",
+        "¿Qué sería un avance pequeño pero observable?",
+        "¿Qué puedes hacer aunque todavía tengas dudas?",
+        "¿Qué obstáculo puedes resolver antes de dar el siguiente paso?",
+        "¿Qué necesitas dejar de esperar para comenzar?",
+        "¿Qué paso te parece posible incluso en un día difícil?",
+        "¿Qué recurso ya tienes y podrías utilizar para comenzar?",
+        "¿Qué podrías simplificar para que empezar no se sienta tan pesado?",
+        "¿Qué sería suficientemente bueno para comenzar, aunque no sea perfecto?",
+        "¿Qué acción depende completamente de ti?",
+        "¿Cuál quieres que sea tu siguiente paso concreto?"
+
+      ]
+    );
+
+
+    agregarPreguntas(
+      61,
+      "Decisiones y prioridades",
+      [
+
+        "¿Qué decisión estás evitando tomar en este momento?",
+        "¿Qué necesitas tener claro para poder decidir?",
+        "¿Qué opción se acerca más a lo que realmente necesitas?",
+        "¿Qué estás priorizando actualmente y por qué?",
+        "¿Qué estás dejando de lado al elegir esta opción?",
+        "¿Qué criterio quieres utilizar para tomar esta decisión?",
+        "¿Qué diferencia hay entre lo que quieres y lo que sientes que deberías elegir?",
+        "¿Qué consecuencia estás considerando con mayor peso?",
+        "¿Qué información te falta para sentir que puedes decidir con mayor claridad?",
+        "¿Qué decisión sería coherente con la persona que quieres ser?",
+        "¿Qué estás intentando resolver al mismo tiempo y podrías separar?",
+        "¿Qué asunto necesita tu atención primero?",
+        "¿Qué puedes postergar sin que eso perjudique tu bienestar?",
+        "¿Qué prioridad has dejado de lado por atender las necesidades de otras personas?",
+        "¿Qué elección estás haciendo por miedo y cuál harías desde tus necesidades?",
+        "¿Qué sería importante considerar además de lo que estás sintiendo ahora?",
+        "¿Qué opción te permitiría cuidar mejor tus límites?",
+        "¿Qué estás priorizando por costumbre y no necesariamente por necesidad?",
+        "¿Qué decisión podría ayudarte a recuperar espacio para ti?",
+        "Si tuvieras que elegir una sola prioridad para este momento, ¿cuál sería?"
+
+      ]
+    );
+
+
+    agregarPreguntas(
+      81,
+      "Objetivos personales",
+      [
+
+        "¿Qué objetivo personal te gustaría trabajar primero?",
+        "¿Cómo sabrías que estás avanzando hacia ese objetivo?",
+        "¿Qué significa para ti alcanzar este objetivo?",
+        "¿Este objetivo nace de una necesidad propia o de una expectativa externa?",
+        "¿Qué cambiaría en tu vida si consiguieras este objetivo?",
+        "¿Qué parte del objetivo está bajo tu control?",
+        "¿Qué primer indicador te mostraría que estás avanzando?",
+        "¿Qué necesitas aprender o practicar para acercarte a este objetivo?",
+        "¿Qué obstáculo personal podría aparecer en el camino?",
+        "¿Qué apoyo podrías necesitar para alcanzar este objetivo?",
+        "¿Qué parte de este objetivo puedes convertir en una acción concreta?",
+        "¿Qué expectativas necesitas ajustar para que este objetivo sea realista?",
+        "¿Qué te gustaría conseguir para ti independientemente de lo que hagan otras personas?",
+        "¿Qué estás dispuesto a hacer de manera diferente para acercarte a este objetivo?",
+        "¿Qué tendría que cambiar en tu día a día para que este objetivo tenga espacio?",
+        "¿Qué te podría hacer abandonar este objetivo y cómo podrías anticiparlo?",
+        "¿Qué objetivo sería importante aunque nadie más lo reconociera?",
+        "¿Qué necesitas aceptar sobre tu situación actual antes de plantearte el siguiente paso?",
+        "¿Qué quieres empezar a construir a partir de este momento?",
+        "¿Cuál sería un objetivo personal concreto que puedas comenzar a trabajar desde ahora?"
+
+      ]
+    );
 
 
     /* =====================================================
@@ -1353,9 +1032,15 @@
     const preguntasPorPagina = 20;
 
     let paginaActual = 1;
+
     let resultadosActuales = [];
+
     let mostrarSoloFavoritas = false;
+
+    let preguntasSeleccionadas = [];
+
     let preguntaModalActual = null;
+
 
     let favoritos = JSON.parse(
       localStorage.getItem("temple_favoritos") || "[]"
@@ -1368,29 +1053,75 @@
        ELEMENTOS
        ===================================================== */
 
-    const busqueda = document.getElementById("busqueda");
-    const filtroModulo = document.getElementById("filtroModulo");
-    const filtroEtapa = document.getElementById("filtroEtapa");
-    const filtroSubtema = document.getElementById("filtroSubtema");
+    const busqueda =
+      document.getElementById("busqueda");
 
-    const botonFavoritos = document.getElementById("botonFavoritos");
-    const contadorFavoritos = document.getElementById("contadorFavoritos");
+    const filtroModulo =
+      document.getElementById("filtroModulo");
 
-    const contadorResultados = document.getElementById("contadorResultados");
-    const textoPagina = document.getElementById("textoPagina");
+    const filtroEtapa =
+      document.getElementById("filtroEtapa");
 
-    const listaPreguntas = document.getElementById("listaPreguntas");
-    const paginacion = document.getElementById("paginacion");
+    const filtroSubtema =
+      document.getElementById("filtroSubtema");
 
-    const modal = document.getElementById("modal");
-    const cerrarModal = document.getElementById("cerrarModal");
 
-    const modalNumero = document.getElementById("modalNumero");
-    const modalPregunta = document.getElementById("modalPregunta");
-    const modalDatos = document.getElementById("modalDatos");
+    const botonFavoritos =
+      document.getElementById("botonFavoritos");
 
-    const modalFavorito = document.getElementById("modalFavorito");
-    const copiarPregunta = document.getElementById("copiarPregunta");
+    const contadorFavoritos =
+      document.getElementById("contadorFavoritos");
+
+
+    const contadorResultados =
+      document.getElementById("contadorResultados");
+
+    const textoPagina =
+      document.getElementById("textoPagina");
+
+
+    const listaPreguntas =
+      document.getElementById("listaPreguntas");
+
+    const paginacion =
+      document.getElementById("paginacion");
+
+
+    const barraSeleccion =
+      document.getElementById("barraSeleccion");
+
+    const contadorSeleccion =
+      document.getElementById("contadorSeleccion");
+
+    const copiarSeleccionadas =
+      document.getElementById("copiarSeleccionadas");
+
+    const limpiarSeleccion =
+      document.getElementById("limpiarSeleccion");
+
+
+    const modal =
+      document.getElementById("modal");
+
+    const cerrarModal =
+      document.getElementById("cerrarModal");
+
+
+    const modalNumero =
+      document.getElementById("modalNumero");
+
+    const modalPregunta =
+      document.getElementById("modalPregunta");
+
+    const modalDatos =
+      document.getElementById("modalDatos");
+
+
+    const modalFavorito =
+      document.getElementById("modalFavorito");
+
+    const copiarPregunta =
+      document.getElementById("copiarPregunta");
 
 
     /* =====================================================
@@ -1398,334 +1129,32 @@
        ===================================================== */
 
     function escaparHTML(texto) {
+
       return String(texto)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
     }
 
 
     function esFavorita(id) {
-      return favoritos.includes(Number(id));
+
+      return favoritos.includes(
+        Number(id)
+      );
+
     }
 
 
     function guardarFavoritos() {
+
       localStorage.setItem(
         "temple_favoritos",
         JSON.stringify(favoritos)
       );
-    }
-
-
-function actualizarContadorFavoritos() {
-
-  const cantidad = favoritos.length;
-
-  contadorFavoritos.textContent =
-    cantidad === 0
-      ? "Todavía no has guardado preguntas"
-      : cantidad === 1
-        ? "1 pregunta guardada"
-        : `${cantidad} preguntas guardadas`;
-
-  if (mostrarSoloFavoritas) {
-
-    botonFavoritos.textContent =
-      "← Ver todas";
-
-  } else {
-
-    botonFavoritos.textContent =
-      cantidad > 0
-        ? "★ Ver favoritas"
-        : "☆ Ver favoritas";
-
-  }
-
-  botonFavoritos.classList.toggle(
-    "activo",
-    mostrarSoloFavoritas
-  );
-
-}
-
-    /* =====================================================
-       FILTROS
-       ===================================================== */
-
-    function valoresUnicos(campo) {
-      return [...new Set(
-        preguntas.map(p => p[campo])
-      )].sort();
-    }
-
-
-    function llenarFiltro(select, valores, textoInicial) {
-
-      select.innerHTML =
-        `<option value="">${textoInicial}</option>`;
-
-      valores.forEach(valor => {
-
-        const option = document.createElement("option");
-
-        option.value = valor;
-        option.textContent = valor;
-
-        select.appendChild(option);
-
-      });
-    }
-
-
-    function prepararFiltros() {
-
-      llenarFiltro(
-        filtroModulo,
-        valoresUnicos("modulo"),
-        "Todos los módulos"
-      );
-
-      llenarFiltro(
-        filtroEtapa,
-        valoresUnicos("etapa"),
-        "Todas las etapas"
-      );
-
-      llenarFiltro(
-        filtroSubtema,
-        valoresUnicos("subtema"),
-        "Todos los subtemas"
-      );
-    }
-
-
-    /* =====================================================
-       FILTRADO
-       ===================================================== */
-
-    function obtenerResultados() {
-
-      const texto = busqueda.value
-        .trim()
-        .toLowerCase();
-
-      const modulo = filtroModulo.value;
-      const etapa = filtroEtapa.value;
-      const subtema = filtroSubtema.value;
-
-      resultadosActuales = preguntas.filter(p => {
-
-        const coincideTexto =
-          !texto ||
-          p.pregunta.toLowerCase().includes(texto) ||
-          p.modulo.toLowerCase().includes(texto) ||
-          p.etapa.toLowerCase().includes(texto) ||
-          p.subtema.toLowerCase().includes(texto);
-
-        const coincideModulo =
-          !modulo || p.modulo === modulo;
-
-        const coincideEtapa =
-          !etapa || p.etapa === etapa;
-
-        const coincideSubtema =
-          !subtema || p.subtema === subtema;
-
-        const coincideFavorito =
-          !mostrarSoloFavoritas || esFavorita(p.id);
-
-        return (
-          coincideTexto &&
-          coincideModulo &&
-          coincideEtapa &&
-          coincideSubtema &&
-          coincideFavorito
-        );
-
-      });
-
-    }
-
-
-    function actualizarResultados(resetearPagina = true) {
-
-      obtenerResultados();
-
-      if (resetearPagina) {
-        paginaActual = 1;
-      }
-
-      const totalPaginas =
-        Math.max(
-          1,
-          Math.ceil(
-            resultadosActuales.length /
-            preguntasPorPagina
-          )
-        );
-
-      if (paginaActual > totalPaginas) {
-        paginaActual = totalPaginas;
-      }
-
-      renderizarPreguntas();
-      renderizarPaginacion();
-      actualizarContadorFavoritos();
-
-    }
-
-
-    /* =====================================================
-       PREGUNTAS
-       ===================================================== */
-
-    function renderizarPreguntas() {
-
-      listaPreguntas.innerHTML = "";
-
-      const inicio =
-        (paginaActual - 1) *
-        preguntasPorPagina;
-
-      const fin =
-        inicio + preguntasPorPagina;
-
-      const pagina =
-        resultadosActuales.slice(inicio, fin);
-
-
-      contadorResultados.textContent =
-        resultadosActuales.length === 1
-          ? "1 pregunta"
-          : `${resultadosActuales.length} preguntas`;
-
-
-      if (resultadosActuales.length === 0) {
-
-        textoPagina.textContent = "";
-
-        listaPreguntas.innerHTML = `
-          <div class="sin-resultados">
-            <div class="sin-resultados-icono">🔎</div>
-            <h3>No encontramos preguntas</h3>
-            <p>
-              Prueba modificando la búsqueda o alguno de los filtros.
-            </p>
-          </div>
-        `;
-
-        return;
-      }
-
-
-      const totalPaginas =
-        Math.ceil(
-          resultadosActuales.length /
-          preguntasPorPagina
-        );
-
-      textoPagina.textContent =
-        `Página ${paginaActual} de ${totalPaginas}`;
-
-
-      pagina.forEach(p => {
-
-        const favorita = esFavorita(p.id);
-
-        const tarjeta =
-          document.createElement("article");
-
-        tarjeta.className = "tarjeta";
-
-        tarjeta.innerHTML = `
-
-          <button
-            class="estrella-tarjeta ${favorita ? "activa" : ""}"
-            type="button"
-            aria-label="${favorita ? "Quitar de favoritas" : "Agregar a favoritas"}"
-            title="${favorita ? "Quitar de favoritas" : "Agregar a favoritas"}"
-            data-id="${p.id}"
-          >
-            ${favorita ? "★" : "☆"}
-          </button>
-
-          <div class="numero-pregunta">
-            PREGUNTA ${p.id}
-          </div>
-
-          <p class="pregunta-texto">
-            ${escaparHTML(p.pregunta)}
-          </p>
-
-          <div class="etiquetas">
-            <span class="etiqueta">
-              ${escaparHTML(p.modulo)}
-            </span>
-
-            <span class="etiqueta">
-              ${escaparHTML(p.etapa)}
-            </span>
-
-            <span class="etiqueta">
-              ${escaparHTML(p.subtema)}
-            </span>
-          </div>
-
-          <button
-            class="boton-ver"
-            type="button"
-            data-id="${p.id}"
-          >
-            Ver pregunta
-          </button>
-
-        `;
-
-        listaPreguntas.appendChild(tarjeta);
-
-      });
-
-
-      document
-        .querySelectorAll(".estrella-tarjeta")
-        .forEach(btn => {
-
-          btn.addEventListener(
-            "click",
-            function(event) {
-
-              event.stopPropagation();
-
-              cambiarFavorito(
-                Number(this.dataset.id)
-              );
-
-            }
-          );
-
-        });
-
-
-      document
-        .querySelectorAll(".boton-ver")
-        .forEach(btn => {
-
-          btn.addEventListener(
-            "click",
-            function() {
-
-              abrirModal(
-                Number(this.dataset.id)
-              );
-
-            }
-          );
-
-        });
 
     }
 
@@ -1734,9 +1163,47 @@ function actualizarContadorFavoritos() {
        FAVORITOS
        ===================================================== */
 
+    function actualizarContadorFavoritos() {
+
+      const cantidad =
+        favoritos.length;
+
+
+      contadorFavoritos.textContent =
+        cantidad === 0
+          ? "Todavía no has guardado preguntas"
+          : cantidad === 1
+            ? "1 pregunta guardada"
+            : `${cantidad} preguntas guardadas`;
+
+
+      if (mostrarSoloFavoritas) {
+
+        botonFavoritos.textContent =
+          "← Ver todas";
+
+      } else {
+
+        botonFavoritos.textContent =
+          cantidad > 0
+            ? "★ Ver favoritas"
+            : "☆ Ver favoritas";
+
+      }
+
+
+      botonFavoritos.classList.toggle(
+        "activo",
+        mostrarSoloFavoritas
+      );
+
+    }
+
+
     function cambiarFavorito(id) {
 
       id = Number(id);
+
 
       if (esFavorita(id)) {
 
@@ -1751,15 +1218,19 @@ function actualizarContadorFavoritos() {
 
       }
 
+
       guardarFavoritos();
 
       actualizarResultados(false);
+
 
       if (
         preguntaModalActual &&
         Number(preguntaModalActual.id) === id
       ) {
+
         actualizarModalFavorito();
+
       }
 
     }
@@ -1781,6 +1252,659 @@ function actualizarContadorFavoritos() {
 
 
     /* =====================================================
+       SELECCIÓN MÚLTIPLE
+       ===================================================== */
+
+    function actualizarBarraSeleccion() {
+
+      const cantidad =
+        preguntasSeleccionadas.length;
+
+
+      contadorSeleccion.textContent =
+        cantidad === 0
+          ? "0 preguntas seleccionadas"
+          : cantidad === 1
+            ? "1 pregunta seleccionada"
+            : `${cantidad} preguntas seleccionadas`;
+
+
+      copiarSeleccionadas.disabled =
+        cantidad === 0;
+
+      limpiarSeleccion.disabled =
+        cantidad === 0;
+
+    }
+
+
+    function limpiarPreguntasSeleccionadas() {
+
+      preguntasSeleccionadas = [];
+
+      actualizarBarraSeleccion();
+
+      renderizarPreguntas();
+
+    }
+
+
+    limpiarSeleccion.addEventListener(
+      "click",
+      function() {
+
+        limpiarPreguntasSeleccionadas();
+
+      }
+    );
+
+
+    copiarSeleccionadas.addEventListener(
+      "click",
+      async function() {
+
+        if (
+          preguntasSeleccionadas.length === 0
+        ) {
+          return;
+        }
+
+
+        const preguntasParaCopiar =
+          preguntas
+            .filter(
+              p =>
+                preguntasSeleccionadas.includes(
+                  Number(p.id)
+                )
+            )
+            .sort(
+              (a, b) => a.id - b.id
+            );
+
+
+        const texto =
+          preguntasParaCopiar
+            .map(
+              p =>
+                `${p.id}. ${p.pregunta}`
+            )
+            .join("\n");
+
+
+        try {
+
+          await navigator.clipboard.writeText(
+            texto
+          );
+
+
+          copiarSeleccionadas.textContent =
+            "✓ Copiadas";
+
+
+          setTimeout(
+            () => {
+
+              copiarSeleccionadas.textContent =
+                "📋 Copiar seleccionadas";
+
+            },
+            1600
+          );
+
+
+        } catch (error) {
+
+          const textarea =
+            document.createElement("textarea");
+
+          textarea.value = texto;
+
+          document.body.appendChild(
+            textarea
+          );
+
+          textarea.select();
+
+          document.execCommand("copy");
+
+          textarea.remove();
+
+
+          copiarSeleccionadas.textContent =
+            "✓ Copiadas";
+
+
+          setTimeout(
+            () => {
+
+              copiarSeleccionadas.textContent =
+                "📋 Copiar seleccionadas";
+
+            },
+            1600
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       FILTROS
+       ===================================================== */
+
+    function valoresUnicos(campo) {
+
+      return [
+        ...new Set(
+          preguntas.map(
+            p => p[campo]
+          )
+        )
+      ].sort();
+
+    }
+
+
+    function llenarFiltro(
+      select,
+      valores,
+      textoInicial
+    ) {
+
+      select.innerHTML =
+        `<option value="">${textoInicial}</option>`;
+
+
+      valores.forEach(
+        valor => {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value = valor;
+
+          option.textContent = valor;
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+
+    }
+
+
+    function prepararFiltros() {
+
+      llenarFiltro(
+        filtroModulo,
+        valoresUnicos("modulo"),
+        "Todos los módulos"
+      );
+
+
+      llenarFiltro(
+        filtroEtapa,
+        valoresUnicos("etapa"),
+        "Todas las etapas"
+      );
+
+
+      llenarFiltro(
+        filtroSubtema,
+        valoresUnicos("subtema"),
+        "Todos los subtemas"
+      );
+
+    }
+
+
+    /* =====================================================
+       FILTRADO
+       ===================================================== */
+
+    function obtenerResultados() {
+
+      const texto =
+        busqueda.value
+          .trim()
+          .toLowerCase();
+
+
+      const modulo =
+        filtroModulo.value;
+
+      const etapa =
+        filtroEtapa.value;
+
+      const subtema =
+        filtroSubtema.value;
+
+
+      resultadosActuales =
+        preguntas.filter(
+          p => {
+
+            const coincideTexto =
+              !texto ||
+              p.pregunta
+                .toLowerCase()
+                .includes(texto) ||
+              p.modulo
+                .toLowerCase()
+                .includes(texto) ||
+              p.etapa
+                .toLowerCase()
+                .includes(texto) ||
+              p.subtema
+                .toLowerCase()
+                .includes(texto);
+
+
+            const coincideModulo =
+              !modulo ||
+              p.modulo === modulo;
+
+
+            const coincideEtapa =
+              !etapa ||
+              p.etapa === etapa;
+
+
+            const coincideSubtema =
+              !subtema ||
+              p.subtema === subtema;
+
+
+            const coincideFavorito =
+              !mostrarSoloFavoritas ||
+              esFavorita(p.id);
+
+
+            return (
+              coincideTexto &&
+              coincideModulo &&
+              coincideEtapa &&
+              coincideSubtema &&
+              coincideFavorito
+            );
+
+          }
+        );
+
+    }
+
+
+    function actualizarResultados(
+      resetearPagina = true
+    ) {
+
+      obtenerResultados();
+
+
+      if (resetearPagina) {
+
+        paginaActual = 1;
+
+      }
+
+
+      const totalPaginas =
+        Math.max(
+          1,
+          Math.ceil(
+            resultadosActuales.length /
+            preguntasPorPagina
+          )
+        );
+
+
+      if (
+        paginaActual >
+        totalPaginas
+      ) {
+
+        paginaActual =
+          totalPaginas;
+
+      }
+
+
+      renderizarPreguntas();
+
+      renderizarPaginacion();
+
+      actualizarContadorFavoritos();
+
+      actualizarBarraSeleccion();
+
+    }
+
+
+    /* =====================================================
+       PREGUNTAS
+       ===================================================== */
+
+    function renderizarPreguntas() {
+
+      listaPreguntas.innerHTML = "";
+
+
+      const inicio =
+        (paginaActual - 1) *
+        preguntasPorPagina;
+
+
+      const fin =
+        inicio +
+        preguntasPorPagina;
+
+
+      const pagina =
+        resultadosActuales.slice(
+          inicio,
+          fin
+        );
+
+
+      contadorResultados.textContent =
+        resultadosActuales.length === 1
+          ? "1 pregunta"
+          : `${resultadosActuales.length} preguntas`;
+
+
+      if (
+        resultadosActuales.length === 0
+      ) {
+
+        textoPagina.textContent = "";
+
+
+        listaPreguntas.innerHTML = `
+
+          <div class="sin-resultados">
+
+            <div class="sin-resultados-icono">
+              🔎
+            </div>
+
+            <h3>
+              No encontramos preguntas
+            </h3>
+
+            <p>
+              Prueba modificando la búsqueda
+              o alguno de los filtros.
+            </p>
+
+          </div>
+
+        `;
+
+
+        return;
+
+      }
+
+
+      const totalPaginas =
+        Math.ceil(
+          resultadosActuales.length /
+          preguntasPorPagina
+        );
+
+
+      textoPagina.textContent =
+        `Página ${paginaActual} de ${totalPaginas}`;
+
+
+      pagina.forEach(
+        p => {
+
+          const favorita =
+            esFavorita(p.id);
+
+
+          const seleccionada =
+            preguntasSeleccionadas.includes(
+              p.id
+            );
+
+
+          const tarjeta =
+            document.createElement(
+              "article"
+            );
+
+
+          tarjeta.className =
+            `tarjeta ${
+              seleccionada
+                ? "seleccionada"
+                : ""
+            }`;
+
+
+          tarjeta.innerHTML = `
+
+            <div class="seleccion-pregunta">
+
+              <label class="checkbox-pregunta">
+
+                <input
+                  type="checkbox"
+                  class="checkbox-seleccion"
+                  data-id="${p.id}"
+                  ${
+                    seleccionada
+                      ? "checked"
+                      : ""
+                  }
+                >
+
+                <span>
+                  Seleccionar
+                </span>
+
+              </label>
+
+            </div>
+
+
+            <button
+              class="estrella-tarjeta ${
+                favorita
+                  ? "activa"
+                  : ""
+              }"
+              type="button"
+              aria-label="${
+                favorita
+                  ? "Quitar de favoritas"
+                  : "Agregar a favoritas"
+              }"
+              title="${
+                favorita
+                  ? "Quitar de favoritas"
+                  : "Agregar a favoritas"
+              }"
+              data-id="${p.id}"
+            >
+              ${
+                favorita
+                  ? "★"
+                  : "☆"
+              }
+            </button>
+
+
+            <div class="numero-pregunta">
+              PREGUNTA ${p.id}
+            </div>
+
+
+            <p class="pregunta-texto">
+              ${escaparHTML(
+                p.pregunta
+              )}
+            </p>
+
+
+            <div class="etiquetas">
+
+              <span class="etiqueta">
+                ${escaparHTML(
+                  p.modulo
+                )}
+              </span>
+
+              <span class="etiqueta">
+                ${escaparHTML(
+                  p.etapa
+                )}
+              </span>
+
+              <span class="etiqueta">
+                ${escaparHTML(
+                  p.subtema
+                )}
+              </span>
+
+            </div>
+
+
+            <button
+              class="boton-ver"
+              type="button"
+              data-id="${p.id}"
+            >
+              Ver pregunta
+            </button>
+
+          `;
+
+
+          listaPreguntas.appendChild(
+            tarjeta
+          );
+
+        }
+      );
+
+
+      document
+        .querySelectorAll(
+          ".checkbox-seleccion"
+        )
+        .forEach(
+          checkbox => {
+
+            checkbox.addEventListener(
+              "change",
+              function() {
+
+                const id =
+                  Number(
+                    this.dataset.id
+                  );
+
+
+                if (this.checked) {
+
+                  if (
+                    !preguntasSeleccionadas.includes(
+                      id
+                    )
+                  ) {
+
+                    preguntasSeleccionadas.push(
+                      id
+                    );
+
+                  }
+
+                } else {
+
+                  preguntasSeleccionadas =
+                    preguntasSeleccionadas.filter(
+                      preguntaId =>
+                        preguntaId !== id
+                    );
+
+                }
+
+
+                actualizarBarraSeleccion();
+
+                renderizarPreguntas();
+
+              }
+            );
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          ".estrella-tarjeta"
+        )
+        .forEach(
+          btn => {
+
+            btn.addEventListener(
+              "click",
+              function(event) {
+
+                event.stopPropagation();
+
+                cambiarFavorito(
+                  Number(
+                    this.dataset.id
+                  )
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          ".boton-ver"
+        )
+        .forEach(
+          btn => {
+
+            btn.addEventListener(
+              "click",
+              function() {
+
+                abrirModal(
+                  Number(
+                    this.dataset.id
+                  )
+                );
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    /* =====================================================
        MODAL
        ===================================================== */
 
@@ -1788,53 +1912,84 @@ function actualizarContadorFavoritos() {
 
       const pregunta =
         preguntas.find(
-          p => Number(p.id) === Number(id)
+          p =>
+            Number(p.id) ===
+            Number(id)
         );
 
-      if (!pregunta) return;
 
-      preguntaModalActual = pregunta;
+      if (!pregunta) {
+        return;
+      }
+
+
+      preguntaModalActual =
+        pregunta;
+
 
       modalNumero.textContent =
         `PREGUNTA ${pregunta.id}`;
 
+
       modalPregunta.textContent =
         pregunta.pregunta;
+
 
       modalDatos.innerHTML = `
 
         <span class="etiqueta">
-          ${escaparHTML(pregunta.modulo)}
+          ${escaparHTML(
+            pregunta.modulo
+          )}
         </span>
 
         <span class="etiqueta">
-          ${escaparHTML(pregunta.etapa)}
+          ${escaparHTML(
+            pregunta.etapa
+          )}
         </span>
 
         <span class="etiqueta">
-          ${escaparHTML(pregunta.subtema)}
+          ${escaparHTML(
+            pregunta.subtema
+          )}
         </span>
 
       `;
 
+
       actualizarModalFavorito();
+
 
       copiarPregunta.textContent =
         "📋 Copiar pregunta";
 
-      modal.classList.add("visible");
 
-      document.body.style.overflow = "hidden";
+      modal.classList.add(
+        "visible"
+      );
+
+
+      document.body.style.overflow =
+        "hidden";
 
     }
 
 
     function actualizarModalFavorito() {
 
-      if (!preguntaModalActual) return;
+      if (
+        !preguntaModalActual
+      ) {
+        return;
+      }
+
 
       const favorita =
-        esFavorita(preguntaModalActual.id);
+        esFavorita(
+          preguntaModalActual.id
+        );
+
 
       if (favorita) {
 
@@ -1848,6 +2003,7 @@ function actualizarContadorFavoritos() {
 
       }
 
+
       modalFavorito.classList.toggle(
         "activa",
         favorita
@@ -1858,11 +2014,17 @@ function actualizarContadorFavoritos() {
 
     function cerrarElModal() {
 
-      modal.classList.remove("visible");
+      modal.classList.remove(
+        "visible"
+      );
 
-      document.body.style.overflow = "";
 
-      preguntaModalActual = null;
+      document.body.style.overflow =
+        "";
+
+
+      preguntaModalActual =
+        null;
 
     }
 
@@ -1877,8 +2039,12 @@ function actualizarContadorFavoritos() {
       "click",
       function(event) {
 
-        if (event.target === modal) {
+        if (
+          event.target === modal
+        ) {
+
           cerrarElModal();
+
         }
 
       }
@@ -1891,9 +2057,13 @@ function actualizarContadorFavoritos() {
 
         if (
           event.key === "Escape" &&
-          modal.classList.contains("visible")
+          modal.classList.contains(
+            "visible"
+          )
         ) {
+
           cerrarElModal();
+
         }
 
       }
@@ -1904,7 +2074,12 @@ function actualizarContadorFavoritos() {
       "click",
       function() {
 
-        if (!preguntaModalActual) return;
+        if (
+          !preguntaModalActual
+        ) {
+          return;
+        }
+
 
         cambiarFavorito(
           preguntaModalActual.id
@@ -1915,60 +2090,102 @@ function actualizarContadorFavoritos() {
 
 
     /* =====================================================
-       COPIAR
+       COPIAR UNA PREGUNTA
        ===================================================== */
 
     copiarPregunta.addEventListener(
       "click",
       async function() {
 
-        if (!preguntaModalActual) return;
+        if (
+          !preguntaModalActual
+        ) {
+          return;
+        }
+
 
         const texto =
           preguntaModalActual.pregunta;
 
+
         try {
 
-          await navigator.clipboard.writeText(texto);
+          await navigator.clipboard.writeText(
+            texto
+          );
+
 
           copiarPregunta.textContent =
             "✓ Copiada";
 
-          setTimeout(() => {
 
-            if (modal.classList.contains("visible")) {
-              copiarPregunta.textContent =
-                "📋 Copiar pregunta";
-            }
+          setTimeout(
+            () => {
 
-          }, 1600);
+              if (
+                modal.classList.contains(
+                  "visible"
+                )
+              ) {
+
+                copiarPregunta.textContent =
+                  "📋 Copiar pregunta";
+
+              }
+
+            },
+            1600
+          );
+
 
         } catch (error) {
 
           const textarea =
-            document.createElement("textarea");
+            document.createElement(
+              "textarea"
+            );
 
-          textarea.value = texto;
 
-          document.body.appendChild(textarea);
+          textarea.value =
+            texto;
+
+
+          document.body.appendChild(
+            textarea
+          );
+
 
           textarea.select();
 
-          document.execCommand("copy");
+          document.execCommand(
+            "copy"
+          );
+
 
           textarea.remove();
+
 
           copiarPregunta.textContent =
             "✓ Copiada";
 
-          setTimeout(() => {
 
-            if (modal.classList.contains("visible")) {
-              copiarPregunta.textContent =
-                "📋 Copiar pregunta";
-            }
+          setTimeout(
+            () => {
 
-          }, 1600);
+              if (
+                modal.classList.contains(
+                  "visible"
+                )
+              ) {
+
+                copiarPregunta.textContent =
+                  "📋 Copiar pregunta";
+
+              }
+
+            },
+            1600
+          );
 
         }
 
@@ -1984,9 +2201,13 @@ function actualizarContadorFavoritos() {
 
       paginacion.innerHTML = "";
 
-      if (resultadosActuales.length === 0) {
+
+      if (
+        resultadosActuales.length === 0
+      ) {
         return;
       }
+
 
       const totalPaginas =
         Math.ceil(
@@ -1994,38 +2215,59 @@ function actualizarContadorFavoritos() {
           preguntasPorPagina
         );
 
-      if (totalPaginas <= 1) {
+
+      if (
+        totalPaginas <= 1
+      ) {
         return;
       }
 
 
       const anterior =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
+
 
       anterior.className =
         "boton-pagina";
 
+
       anterior.textContent =
         "← Anterior";
 
+
       anterior.disabled =
         paginaActual === 1;
+
 
       anterior.addEventListener(
         "click",
         function() {
 
-          if (paginaActual > 1) {
+          if (
+            paginaActual > 1
+          ) {
 
             paginaActual--;
 
+
             renderizarPreguntas();
+
             renderizarPaginacion();
 
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
+
+            document
+              .getElementById(
+                "listaPreguntas"
+              )
+              .scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+              });
 
           }
 
@@ -2034,51 +2276,78 @@ function actualizarContadorFavoritos() {
 
 
       const paginaInfo =
-  document.createElement("span");
+        document.createElement(
+          "span"
+        );
 
-paginaInfo.className =
-  "pagina-info";
 
-const inicio =
-  (paginaActual - 1) *
-  preguntasPorPagina + 1;
+      paginaInfo.className =
+        "pagina-info";
 
-const fin =
-  Math.min(
-    paginaActual * preguntasPorPagina,
-    resultadosActuales.length
-  );
 
-paginaInfo.textContent =
-  `Preguntas ${inicio}–${fin} de ${resultadosActuales.length}`;
+      const inicio =
+        (paginaActual - 1) *
+        preguntasPorPagina + 1;
+
+
+      const fin =
+        Math.min(
+          paginaActual *
+            preguntasPorPagina,
+          resultadosActuales.length
+        );
+
+
+      paginaInfo.textContent =
+        `Preguntas ${inicio}–${fin} de ${resultadosActuales.length}`;
+
 
       const siguiente =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
+
 
       siguiente.className =
         "boton-pagina";
 
+
       siguiente.textContent =
         "Siguiente →";
 
+
       siguiente.disabled =
         paginaActual === totalPaginas;
+
 
       siguiente.addEventListener(
         "click",
         function() {
 
-          if (paginaActual < totalPaginas) {
+          if (
+            paginaActual <
+            totalPaginas
+          ) {
 
             paginaActual++;
 
+
             renderizarPreguntas();
+
             renderizarPaginacion();
 
-document.getElementById("listaPreguntas").scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
+
+            document
+              .getElementById(
+                "listaPreguntas"
+              )
+              .scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+              });
 
           }
 
@@ -2086,9 +2355,17 @@ document.getElementById("listaPreguntas").scrollIntoView({
       );
 
 
-      paginacion.appendChild(anterior);
-      paginacion.appendChild(paginaInfo);
-      paginacion.appendChild(siguiente);
+      paginacion.appendChild(
+        anterior
+      );
+
+      paginacion.appendChild(
+        paginaInfo
+      );
+
+      paginacion.appendChild(
+        siguiente
+      );
 
     }
 
@@ -2100,7 +2377,9 @@ document.getElementById("listaPreguntas").scrollIntoView({
     busqueda.addEventListener(
       "input",
       function() {
+
         actualizarResultados(true);
+
       }
     );
 
@@ -2108,7 +2387,9 @@ document.getElementById("listaPreguntas").scrollIntoView({
     filtroModulo.addEventListener(
       "change",
       function() {
+
         actualizarResultados(true);
+
       }
     );
 
@@ -2116,7 +2397,9 @@ document.getElementById("listaPreguntas").scrollIntoView({
     filtroEtapa.addEventListener(
       "change",
       function() {
+
         actualizarResultados(true);
+
       }
     );
 
@@ -2124,7 +2407,9 @@ document.getElementById("listaPreguntas").scrollIntoView({
     filtroSubtema.addEventListener(
       "change",
       function() {
+
         actualizarResultados(true);
+
       }
     );
 
@@ -2136,6 +2421,8 @@ document.getElementById("listaPreguntas").scrollIntoView({
     prepararFiltros();
 
     actualizarContadorFavoritos();
+
+    actualizarBarraSeleccion();
 
     actualizarResultados(true);
 
