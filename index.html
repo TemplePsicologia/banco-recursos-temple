@@ -2034,14 +2034,23 @@ function actualizarContadorFavoritos() {
 
 
       const paginaInfo =
-        document.createElement("span");
+  document.createElement("span");
 
-      paginaInfo.className =
-        "pagina-info";
+paginaInfo.className =
+  "pagina-info";
 
-      paginaInfo.textContent =
-        `Página ${paginaActual} de ${totalPaginas}`;
+const inicio =
+  (paginaActual - 1) *
+  preguntasPorPagina + 1;
 
+const fin =
+  Math.min(
+    paginaActual * preguntasPorPagina,
+    resultadosActuales.length
+  );
+
+paginaInfo.textContent =
+  `Preguntas ${inicio}–${fin} de ${resultadosActuales.length}`;
 
       const siguiente =
         document.createElement("button");
